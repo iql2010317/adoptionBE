@@ -23,6 +23,12 @@ public class UserInfoController {
 	public UserInfoResponse create(@RequestBody UserInfoRequest req) {
 		return userInfoService.create(req);
 	}
+	
+	//§ó·sÅÞ¿è
+	@PostMapping(value = "api/adoption/userInfo/updateUserInfo")
+	public UserInfoResponse update(@RequestBody UserInfoRequest req) {
+		return userInfoService.update(req);
+	}
 
 	@GetMapping(value = "api/adoption/userInfo/searchAllUserInfo")
 	public UserInfoResponse search() {

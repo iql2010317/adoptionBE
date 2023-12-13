@@ -11,8 +11,10 @@ import com.example.adoption.entity.UserInfo;
 //}
 
 @Repository
-public interface UserInfoDao extends JpaRepository<UserInfo, String> {
+public interface UserInfoDao extends JpaRepository<UserInfo, Integer> {
 
 	UserInfo findByAccount(String account);
+
+	UserInfo findByEmail(String email);
 
 }

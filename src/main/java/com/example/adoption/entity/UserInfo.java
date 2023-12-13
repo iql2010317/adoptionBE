@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -12,10 +14,10 @@ import jakarta.persistence.Table;
 //@IdClass(UserInfoId.class)
 public class UserInfo {
 
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name = "user_id")
-	private int userId; // PK1 //暫時註解
+	private int userId; // PK1
 
 	@Column(name = "user_name")
 	private String userName;
@@ -27,9 +29,9 @@ public class UserInfo {
 	@Column(name = "password")
 	private String password;
 
-	@Id
+//	@Id
 	@Column(name = "email")
-	private String email; /// 現在email是PK
+	private String email; /// 暫時註解
 
 	@Column(name = "phone")
 	private String phone;
@@ -61,6 +63,9 @@ public class UserInfo {
 	@Column(name = "user_photo")
 	private String userPhoto;
 
+	@Column(name = "user_real_name")
+	private String userRealName;
+
 	public UserInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -68,7 +73,7 @@ public class UserInfo {
 
 	public UserInfo(int userId, String userName, String account, String password, String email, String phone,
 			String address, String profile, int age, LocalDate birthday, String gender, String jobOccupation,
-			String familyStatus, String sentenceToAdopter, String userPhoto) {
+			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -85,6 +90,7 @@ public class UserInfo {
 		this.familyStatus = familyStatus;
 		this.sentenceToAdopter = sentenceToAdopter;
 		this.userPhoto = userPhoto;
+		this.userRealName = userRealName;
 	}
 
 	public int getUserId() {
@@ -205,6 +211,14 @@ public class UserInfo {
 
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
+	}
+
+	public String getUserRealName() {
+		return userRealName;
+	}
+
+	public void setUserRealName(String userRealName) {
+		this.userRealName = userRealName;
 	}
 
 }

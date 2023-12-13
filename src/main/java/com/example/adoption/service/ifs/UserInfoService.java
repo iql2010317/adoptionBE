@@ -10,4 +10,7 @@ public interface UserInfoService {
 	public UserInfoResponse search();
 
 	public boolean userLogin(String account, String password);
+
+	public UserInfoResponse update(UserInfoRequest req);
+
 }
