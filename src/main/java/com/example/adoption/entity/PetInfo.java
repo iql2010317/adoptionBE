@@ -63,7 +63,7 @@ public class PetInfo {
 	private String petOtherPhoto;
 	
 	@Column(name = "location")
-	private String locaiton;
+	private String location;
 
 	public PetInfo() {
 		super();
@@ -73,7 +73,7 @@ public class PetInfo {
 	
 
 	public PetInfo(int userId, String petName, String petBreed, String petStatus, String adoptionStatus, String age,
-			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String locaiton) {
+			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String location) {
 		super();
 		this.userId = userId;
 		this.petName = petName;
@@ -86,18 +86,34 @@ public class PetInfo {
 		this.ligation = ligation;
 		this.type = type;
 		this.petPhoto = petPhoto;
-		this.locaiton = locaiton;
+		this.location = location;
 	}
+	
+	
 
 
-
-	public PetInfo(int userId, String petName, String adoptionStatus, String type) {
+	public PetInfo(String petId, int userId, String petName, String petBreed, String petStatus, String adoptionStatus,
+			String adoptionConditions, String age, String vaccine, String petProfile, boolean ligation, String type,
+			String petPhoto, String petOtherPhoto, String location) {
 		super();
+		this.petId = petId;
 		this.userId = userId;
 		this.petName = petName;
+		this.petBreed = petBreed;
+		this.petStatus = petStatus;
 		this.adoptionStatus = adoptionStatus;
+		this.adoptionConditions = adoptionConditions;
+		this.age = age;
+		this.vaccine = vaccine;
+		this.petProfile = petProfile;
+		this.ligation = ligation;
 		this.type = type;
+		this.petPhoto = petPhoto;
+		this.petOtherPhoto = petOtherPhoto;
+		this.location = location;
 	}
+
+
 
 	/* getter&setter */
 	public String getPetId() {
@@ -229,11 +245,11 @@ public class PetInfo {
 	}
 
 	public String getLocaiton() {
-		return locaiton;
+		return location;
 	}
 
-	public void setLocaiton(String locaiton) {
-		this.locaiton = locaiton;
+	public void setLocaiton(String location) {
+		this.location = location;
 	}
 	
 	
