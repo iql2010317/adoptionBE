@@ -25,7 +25,7 @@ class AdoptionApplicationTests {
 	@Autowired
 	private UserInfoDao userInfoDao;
 
-	// ·s¼W¤H­û¸ê®Æ
+	// ï¿½sï¿½Wï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½
 	@Test
 	void userInfoCreateTest() {
 		UserInfo userInfo = new UserInfo();
@@ -35,8 +35,8 @@ class AdoptionApplicationTests {
 //		userInfo.setEmail("test@gamil.com");
 		LocalDate birth = LocalDate.parse("2001-05-05");
 //		userInfo.setAccount("haha");
-		userInfo.setPassword("test01");
-		userInfo.setEmail("test01@mail.com");
+		userInfo.setPassword("test033");
+		userInfo.setEmail("test033@mail.com");
 		userInfo.setBirthday(birth);
 
 		UserInfoRequest req = new UserInfoRequest(userInfo);
@@ -45,36 +45,36 @@ class AdoptionApplicationTests {
 
 	@Test
 	void userInfoUpdateTest() {
-		// ¼ÒÀÀ¤w¦s¦b©ó¸ê®Æ®w¤¤ªº UserInfo
-		int userIdToUpdate = 4; // °²³]»Ý­n§ó·sªº¥Î¤áID¬°1
+		// ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½sï¿½bï¿½ï¿½ï¿½Æ®wï¿½ï¿½ï¿½ï¿½ UserInfo
+		int userIdToUpdate = 4; // ï¿½ï¿½ï¿½]ï¿½Ý­nï¿½ï¿½sï¿½ï¿½ï¿½Î¤ï¿½IDï¿½ï¿½1
 		UserInfo existingUserInfo = userInfoDao.findById(userIdToUpdate).orElse(null);
 
-		// °²³]¦b¸ê®Æ®w¤¤§ä¨ì¤F¸Ó¥Î¤á«H®§
+		// ï¿½ï¿½ï¿½]ï¿½bï¿½ï¿½Æ®wï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½Ó¥Î¤ï¿½Hï¿½ï¿½
 		assertNotNull(existingUserInfo);
 
-		// §ó·s¸Ó¨Ï¥ÎªÌªº¸ê®Æ
-		existingUserInfo.setUserName("Updated Name3"); // §ó·s¥Î¤á¦WºÙ
+		// ï¿½ï¿½sï¿½Ó¨Ï¥ÎªÌªï¿½ï¿½ï¿½ï¿½
+		existingUserInfo.setUserName("Updated Name3"); // ï¿½ï¿½sï¿½Î¤ï¿½Wï¿½ï¿½
 
-		// ³Ð«Ø¤@­Ó UserInfoRequest ª«¥ó
+		// ï¿½Ð«Ø¤@ï¿½ï¿½ UserInfoRequest ï¿½ï¿½ï¿½ï¿½
 		UserInfoRequest req = new UserInfoRequest(existingUserInfo);
 
-		// ©I¥s update ¤èªk¶i¦æ§ó·s
+		// ï¿½Iï¿½s update ï¿½ï¿½kï¿½iï¿½ï¿½ï¿½s
 		UserInfoResponse response = userInfoService.update(req);
 
-		// ½T»{§ó·s«áªº¦^À³¬O§_¦¨¥\
+		// ï¿½Tï¿½{ï¿½ï¿½sï¿½áªºï¿½^ï¿½ï¿½ï¿½Oï¿½_ï¿½ï¿½ï¿½\
 		assertNotNull(response);
 		assertEquals(existingUserInfo.getUserName(), response.getUserInfo().getUserName());
 	}
 
-	// ´M§ä¤H­û¸ê®Æ²M³æ
+	// ï¿½Mï¿½ï¿½Hï¿½ï¿½ï¿½ï¿½Æ²Mï¿½ï¿½
 	@Test
 	void userInfoSearchTest() {
 		UserInfoResponse res = userInfoService.search();
 		List<UserInfo> userInfoList = res.getUserInfoList();
 		for (UserInfo userInfo : userInfoList) {
-			System.out.println("¤H­û¦WºÙ:" + userInfo.getUserName());
-			System.out.println("¹q¤l¶l¥ó:" + userInfo.getEmail());
-			System.out.println("¤â¾÷¸¹½X:" + userInfo.getPhone());
+			System.out.println("ï¿½Hï¿½ï¿½ï¿½Wï¿½ï¿½:" + userInfo.getUserName());
+			System.out.println("ï¿½qï¿½lï¿½lï¿½ï¿½:" + userInfo.getEmail());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½X:" + userInfo.getPhone());
 		}
 	}
 

@@ -18,12 +18,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//RestController¥i¥H¥Î
+	//RestControllerï¿½iï¿½Hï¿½ï¿½
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'mysql:mysql-connector-java:8.0.31'
-	//spring security  ¨Ï¥ÎBCryptpasswordEncoder:¥[±K±K½X¥Î
+	//spring security  ï¿½Ï¥ï¿½BCryptpasswordEncoder:ï¿½[ï¿½Kï¿½Kï¿½Xï¿½ï¿½
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	//¦³±K½Xªº¸Ü ­n¥Îexclude
+	//ï¿½ï¿½ï¿½Kï¿½Xï¿½ï¿½ï¿½ï¿½ ï¿½nï¿½ï¿½exclude
 	
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
