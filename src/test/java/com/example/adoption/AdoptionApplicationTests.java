@@ -35,8 +35,8 @@ class AdoptionApplicationTests {
 //		userInfo.setEmail("test@gamil.com");
 		LocalDate birth = LocalDate.parse("1995-03-13");
 //		userInfo.setAccount("haha");
-		userInfo.setPassword("test01");
-		userInfo.setEmail("test01@mail.com");
+		userInfo.setPassword("123");
+		userInfo.setEmail("test99");
 		userInfo.setBirthday(birth);
 
 		UserInfoRequest req = new UserInfoRequest(userInfo);
