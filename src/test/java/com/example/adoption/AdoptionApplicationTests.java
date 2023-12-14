@@ -33,10 +33,10 @@ class AdoptionApplicationTests {
 //		userInfo.setPassword("test");
 //		userInfo.setPhone("0977456874");
 //		userInfo.setEmail("test@gamil.com");
-		LocalDate birth = LocalDate.parse("2001-05-05");
+		LocalDate birth = LocalDate.parse("1995-03-13");
 //		userInfo.setAccount("haha");
-		userInfo.setPassword("test033");
-		userInfo.setEmail("test033@mail.com");
+		userInfo.setPassword("test01");
+		userInfo.setEmail("test01@mail.com");
 		userInfo.setBirthday(birth);
 
 		UserInfoRequest req = new UserInfoRequest(userInfo);
@@ -46,14 +46,14 @@ class AdoptionApplicationTests {
 	@Test
 	void userInfoUpdateTest() {
 		// �����w�s�b���Ʈw���� UserInfo
-		int userIdToUpdate = 4; // ���]�ݭn��s���Τ�ID��1
+		int userIdToUpdate = 13; // ���]�ݭn��s���Τ�ID��1
 		UserInfo existingUserInfo = userInfoDao.findById(userIdToUpdate).orElse(null);
 
 		// ���]�b��Ʈw�����F�ӥΤ�H��
 		assertNotNull(existingUserInfo);
 
 		// ��s�ӨϥΪ̪����
-		existingUserInfo.setUserName("Updated Name3"); // ��s�Τ�W��
+		existingUserInfo.setUserName("��"); // ��s�Τ�W��
 
 		// �Ыؤ@�� UserInfoRequest ����
 		UserInfoRequest req = new UserInfoRequest(existingUserInfo);

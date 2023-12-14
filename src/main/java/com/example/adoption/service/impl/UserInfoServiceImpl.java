@@ -40,7 +40,14 @@ public class UserInfoServiceImpl implements UserInfoService {
 			String[] emailParts = email.split("@");
 			userInfo.setAccount(emailParts[0]); // 使用 @ 之前的字串作為帳號
 		}
-
+		
+		//12.14 permission for admin and user
+		if(userInfo.getEmail()== "iql2010317@gmail.com") {
+			userInfo.setPermission(20); //for admin
+		}else {
+			userInfo.setPermission(5);  //forn user
+		}
+		
 		UserInfo saveduserInfo = userInfoDao.save(userInfo);
 		return new UserInfoResponse(saveduserInfo);
 	}
@@ -125,6 +132,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 			if (userInfo.getUserRealName() != null) {
 				existingUserInfo.setUserRealName(userInfo.getUserRealName());
+			}
+			
+			//12.14 new
+			if (userInfo.getPermission() >0){
+				existingUserInfo.setPermission(userInfo.getPermission());
 			}
 
 			String base64Photo = userInfo.getUserPhoto();

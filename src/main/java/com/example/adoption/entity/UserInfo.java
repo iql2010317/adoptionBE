@@ -66,6 +66,11 @@ public class UserInfo {
 	@Column(name = "user_real_name")
 	private String userRealName;
 
+	// 12.14 new
+
+	@Column(name = "permission")
+	private int permission;
+
 	public UserInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,7 +78,7 @@ public class UserInfo {
 
 	public UserInfo(int userId, String userName, String account, String password, String email, String phone,
 			String address, String profile, int age, LocalDate birthday, String gender, String jobOccupation,
-			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName) {
+			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName, int permission) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -91,6 +96,7 @@ public class UserInfo {
 		this.sentenceToAdopter = sentenceToAdopter;
 		this.userPhoto = userPhoto;
 		this.userRealName = userRealName;
+		this.permission = permission;
 	}
 
 	public int getUserId() {
@@ -219,6 +225,14 @@ public class UserInfo {
 
 	public void setUserRealName(String userRealName) {
 		this.userRealName = userRealName;
+	}
+
+	public int getPermission() {
+		return permission;
+	}
+
+	public void setPermission(int permission) {
+		this.permission = permission;
 	}
 
 }
