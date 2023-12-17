@@ -1,6 +1,7 @@
 package com.example.adoption.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,6 +72,15 @@ public class UserInfo {
 	@Column(name = "permission")
 	private int permission;
 
+	@Column(name = "register_random_string")
+	private String registerRandomString;
+
+	@Column(name = "random_string_time")
+	private LocalDateTime randomStringTime;
+
+	@Column(name = "has_opened")
+	private boolean hasOpened;
+
 	public UserInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,7 +88,8 @@ public class UserInfo {
 
 	public UserInfo(int userId, String userName, String account, String password, String email, String phone,
 			String address, String profile, int age, LocalDate birthday, String gender, String jobOccupation,
-			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName, int permission) {
+			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName, int permission,
+			String registerRandomString, LocalDateTime randomStringTime, boolean hasOpened) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -97,6 +108,9 @@ public class UserInfo {
 		this.userPhoto = userPhoto;
 		this.userRealName = userRealName;
 		this.permission = permission;
+		this.registerRandomString = registerRandomString;
+		this.randomStringTime = randomStringTime;
+		this.hasOpened = hasOpened;
 	}
 
 	public int getUserId() {
@@ -233,6 +247,30 @@ public class UserInfo {
 
 	public void setPermission(int permission) {
 		this.permission = permission;
+	}
+
+	public String getRegisterRandomString() {
+		return registerRandomString;
+	}
+
+	public void setRegisterRandomString(String registerRandomString) {
+		this.registerRandomString = registerRandomString;
+	}
+
+	public LocalDateTime getRandomStringTime() {
+		return randomStringTime;
+	}
+
+	public void setRandomStringTime(LocalDateTime randomStringTime) {
+		this.randomStringTime = randomStringTime;
+	}
+
+	public boolean isHasOpened() {
+		return hasOpened;
+	}
+
+	public void setHasOpened(boolean hasOpened) {
+		this.hasOpened = hasOpened;
 	}
 
 }
