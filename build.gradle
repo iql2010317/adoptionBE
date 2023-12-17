@@ -28,6 +28,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'com.github.ben-manes.caffeine:caffeine'
+	/// 12.14 send email
+	implementation 'com.sun.mail:javax.mail:1.6.2'	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

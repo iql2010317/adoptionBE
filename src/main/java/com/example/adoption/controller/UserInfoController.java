@@ -23,8 +23,13 @@ public class UserInfoController {
 	public UserInfoResponse create(@RequestBody UserInfoRequest req) {
 		return userInfoService.create(req);
 	}
-	
-	//更新邏輯
+
+	@PostMapping(value = "api/adoption/userInfo/compare")
+	public UserInfoResponse compareAuthenticationCode(@RequestBody UserInfoRequest req) {
+		return userInfoService.compareAuthenticationCode(req);
+	}
+
+	// 更新邏輯
 	@PostMapping(value = "api/adoption/userInfo/updateUserInfo")
 	public UserInfoResponse update(@RequestBody UserInfoRequest req) {
 		return userInfoService.update(req);
@@ -36,9 +41,22 @@ public class UserInfoController {
 	}
 
 	@GetMapping(value = "api/adoption/userInfo/login")
-	public boolean userLogin(@RequestParam(value = "account", required = false) String account, //
+	public String userLogin(@RequestParam(value = "email", required = false) String email, //
 			@RequestParam(value = "password", required = false) String password) {
-		return userInfoService.userLogin(account, password);
+		return userInfoService.userLogin(email, password);
+	}
+
+	@GetMapping(value = "api/adoption/userInfo/userFogetPassword")
+	public String userFogetPassword(@RequestParam(value = "email", required = false) String email) {
+		return userInfoService.userFogetPassword(email);
+	}
+
+	@GetMapping(value = "api/adoption/userInfo/forceChangePassword")
+	public String forceChangePassword(//
+			@RequestParam(value = "email", required = false) String email, //
+			@RequestParam(value = "newPassword", required = false) String newPassword, //
+			@RequestParam(value = "confirmPassword", required = false) String confirmPassword) {
+		return userInfoService.forceChangePassword(email, newPassword, confirmPassword);
 	}
 
 }
