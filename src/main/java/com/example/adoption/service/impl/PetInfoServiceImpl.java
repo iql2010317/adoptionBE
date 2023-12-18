@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -53,13 +52,16 @@ public class PetInfoServiceImpl implements PetInfoService{
 
 		// 設定pet id
 		PetInfo lastPet = petDao.findTopByUserIdOrderByPetIdDesc(pet.getUserId());
+		System.out.println(lastPet);
 		if(lastPet == null) {
 			pet.setPetId("P" + pet.getUserId() + "01");
+		} else {
+			String lastPetId = lastPet.getPetId();
+			String numericPart = lastPetId.substring(1);// 获取字符串的第二个字符开始的部分
+			long lastPetIdLong = Long.parseLong(numericPart); // 将提取的字符串部分转换为 long 类型
+			pet.setPetId("P" + (lastPetIdLong+1) );
 		}
-		String lastPetId = lastPet.getPetId();
-		String numericPart = lastPetId.substring(1);// 获取字符串的第二个字符开始的部分
-		long lastPetIdLong = Long.parseLong(numericPart); // 将提取的字符串部分转换为 long 类型
-		pet.setPetId("P" + (lastPetIdLong+1) );
+		
 		
 		
 		// save to DB
@@ -161,6 +163,14 @@ public class PetInfoServiceImpl implements PetInfoService{
 		}
 		
 		return new PetInfoResponse(null, RtnCode.SUCCESSFUL);
+	}
+
+
+
+	@Override
+	public PetInfoListResponse getAdoptList(int userId) {
+		// TODO Auto-generated method stub
+		return new PetInfoListResponse(null, RtnCode.SUCCESSFUL);
 	}
 
 }

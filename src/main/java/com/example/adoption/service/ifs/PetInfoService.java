@@ -18,7 +18,7 @@ public interface PetInfoService {
 	// delete the pet's info
 	public PetInfoResponse deletePet(String petId, int userId);
 	
-	
-	
+	// find the user's adopt list
+	public PetInfoListResponse getAdoptList(int userId);
 	
 }

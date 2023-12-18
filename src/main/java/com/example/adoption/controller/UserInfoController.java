@@ -13,7 +13,7 @@ import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserInfoController {
 
 	@Autowired
@@ -29,7 +29,7 @@ public class UserInfoController {
 		return userInfoService.compareAuthenticationCode(req);
 	}
 
-	// ╖С╥sеч©Х
+	// О©╫О©╫sО©╫ч©О©╫
 	@PostMapping(value = "api/adoption/userInfo/updateUserInfo")
 	public UserInfoResponse update(@RequestBody UserInfoRequest req) {
 		return userInfoService.update(req);
