@@ -56,6 +56,10 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	public List<PetInfo> findAllByAdopterIdListContaining(@Param("userId")String userId);
 	
 	
-	public List<PetInfo> findAllByAdoptionStatus(String adoptionStatus);
+	public List<PetInfo> findAllByAdoptionStatus(String adoption);
+	
+	public List<PetInfo> findAllByAdoptionStatusAndTypeContaining(String adoption, String type);
+	
+	public List<PetInfo> findAllByAdoptionStatusAndTypeContainingAndLocationContaining(String adoption, String type, String location);
 	
 }

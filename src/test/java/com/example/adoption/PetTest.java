@@ -80,4 +80,11 @@ public class PetTest {
 		
 	}
 	
+	@Test
+	public void getAdoptablePetListTest() {
+		PetInfoListResponse res = petService.getAdoptablePetList(null, null);
+		System.out.println(res.getRtnCode().getMessage());
+		System.out.println(res.getPetInfoList().size());
+	}
+	
 }
