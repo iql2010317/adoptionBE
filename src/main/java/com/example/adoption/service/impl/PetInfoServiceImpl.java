@@ -57,13 +57,9 @@ public class PetInfoServiceImpl implements PetInfoService{
 			pet.setPetId("P" + pet.getUserId() + "01");
 		}
 		String lastPetId = lastPet.getPetId();
-		System.out.println(lastPetId);
 		String numericPart = lastPetId.substring(1);// 获取字符串的第二个字符开始的部分
 		long lastPetIdLong = Long.parseLong(numericPart); // 将提取的字符串部分转换为 long 类型
-		System.out.println(lastPetIdLong); // 输出 801
 		pet.setPetId("P" + (lastPetIdLong+1) );
-		
-		System.out.println(pet.getPetId());
 		
 		
 		// save to DB

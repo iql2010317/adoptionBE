@@ -1,5 +1,7 @@
 package com.example.adoption.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,30 +16,39 @@ public class PetInfo {
 	
 	/* parameters */
 	@Id
+	@JsonProperty("pet_id")
 	@Column(name = "pet_id")
 	private String petId;
 
+	@JsonProperty("user_id")
 	@Column(name = "user_id")
 	private int userId;
 
+	@JsonProperty("pet_name")
 	@Column(name = "pet_name")
 	private String petName; 
 
+	@JsonProperty("adopter_id_list")
 	@Column(name = "adopter_id_list")
 	private String adopterIdList;
 
+	@JsonProperty("final_adopter_id")
 	@Column(name = "final_adopter_id")
 	private int finalAdopterId; 
 
+	@JsonProperty("pet_breed")
 	@Column(name = "pet_breed")
 	private String petBreed;
 
+	@JsonProperty("pet_status")
 	@Column(name = "pet_status")
 	private String petStatus;
 
+	@JsonProperty("adoption_status")
 	@Column(name = "adoption_status")
 	private String adoptionStatus;
 
+	@JsonProperty("adoption_conditions")
 	@Column(name = "adoption_conditions")
 	private String adoptionConditions;
 
@@ -47,6 +58,7 @@ public class PetInfo {
 	@Column(name = "vaccine")
 	private String vaccine;
 
+	@JsonProperty("pet_peofile")
 	@Column(name = "pet_profile")
 	private String petProfile;
 
@@ -56,9 +68,11 @@ public class PetInfo {
 	@Column(name = "type")
 	private String type;
 
+	@JsonProperty("pet_photo")
 	@Column(name = "pet_photo")
 	private String petPhoto;
 
+	@JsonProperty("pet_other_photo")
 	@Column(name = "pet_other_photo")
 	private String petOtherPhoto;
 	
