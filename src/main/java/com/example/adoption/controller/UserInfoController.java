@@ -13,7 +13,7 @@ import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserInfoController {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class UserInfoController {
 		return userInfoService.create(req);
 	}
 	
-	//§ó·sÅÞ¿è
+	//ï¿½ï¿½sï¿½Þ¿ï¿½
 	@PostMapping(value = "api/adoption/userInfo/updateUserInfo")
 	public UserInfoResponse update(@RequestBody UserInfoRequest req) {
 		return userInfoService.update(req);
@@ -36,9 +36,9 @@ public class UserInfoController {
 	}
 
 	@GetMapping(value = "api/adoption/userInfo/login")
-	public boolean userLogin(@RequestParam(value = "account", required = false) String account, //
+	public boolean userLogin(@RequestParam(value = "email", required = false) String email, //
 			@RequestParam(value = "password", required = false) String password) {
-		return userInfoService.userLogin(account, password);
+		return userInfoService.userLogin(email, password);
 	}
 
 }

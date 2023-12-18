@@ -27,18 +27,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfoResponse create(UserInfoRequest req) {
 		UserInfo userInfo = req.getUserInfo();
 
-		// ³B²z ±K½X¥[±KÅÞ¿è
-		// ¦pªGuserªº±K½X¤£¬°ªÅ «h¥[±K
+		// ï¿½Bï¿½z ï¿½Kï¿½Xï¿½[ï¿½Kï¿½Þ¿ï¿½
+		// ï¿½pï¿½Guserï¿½ï¿½ï¿½Kï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½hï¿½[ï¿½K
 		if (userInfo.getPassword() != null && !userInfo.getPassword().isEmpty()) {
 			String encryptedPassword = encoder.encode(userInfo.getPassword());
-			userInfo.setPassword(encryptedPassword); // ±N¥[±K«áªº±K½X³]©w¦^UserInfoª«¥ó¤¤
+			userInfo.setPassword(encryptedPassword); // ï¿½Nï¿½[ï¿½Kï¿½áªºï¿½Kï¿½Xï¿½]ï¿½wï¿½^UserInfoï¿½ï¿½ï¿½ï¿½
 		}
 
-		///// ³B²zaccountÅÞ¿è ¦pªG¨Ï¥ÎªÌ¨S¦³³]©waccount «h§Q¥Îmail@«eªº¦r¦ê·í¦¨account
+		///// ï¿½Bï¿½zaccountï¿½Þ¿ï¿½ ï¿½pï¿½Gï¿½Ï¥ÎªÌ¨Sï¿½ï¿½ï¿½]ï¿½waccount ï¿½hï¿½Qï¿½ï¿½mail@ï¿½eï¿½ï¿½ï¿½rï¿½ï¿½ï¿½account
 		if (userInfo.getAccount() == null || userInfo.getAccount().isEmpty()) {
 			String email = userInfo.getEmail();
 			String[] emailParts = email.split("@");
-			userInfo.setAccount(emailParts[0]); // ¨Ï¥Î @ ¤§«eªº¦r¦ê§@¬°±b¸¹
+			userInfo.setAccount(emailParts[0]); // ï¿½Ï¥ï¿½ @ ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½rï¿½ï¿½@ï¿½ï¿½ï¿½bï¿½ï¿½
 		}
 
 		UserInfo saveduserInfo = userInfoDao.save(userInfo);
@@ -52,13 +52,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean userLogin(String account, String password) {
+		
+		System.out.println(account);
+		System.out.println(password);
 		UserInfo userInfo = userInfoDao.findByAccount(account);
 
-		// §ä¤£¨ì±b¸¹ µn¤J¥¢±Ñ
+		// ï¿½ä¤£ï¿½ï¿½bï¿½ï¿½ ï¿½nï¿½Jï¿½ï¿½ï¿½ï¿½
 		if (userInfo == null) {
 			return false;
 		}
-		// ±K½X¿ù»~ µn¤J¥¢±Ñ
+		// ï¿½Kï¿½Xï¿½ï¿½ï¿½~ ï¿½nï¿½Jï¿½ï¿½ï¿½ï¿½
 
 		if (!encoder.matches(password, userInfo.getPassword())) {
 			return false;
@@ -130,10 +133,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 			String base64Photo = userInfo.getUserPhoto();
 
 			if (base64Photo != null && !base64Photo.isEmpty()) {
-				// §ä¨ì³r¸¹ªº¦ì¸m
+				// ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½m
 				int commaIndex = base64Photo.indexOf(',');
 				if (commaIndex != -1) {
-					// ºI¨ú³r¸¹«áªº³¡¤À
+					// ï¿½Iï¿½ï¿½ï¿½rï¿½ï¿½ï¿½áªºï¿½ï¿½ï¿½ï¿½
 					String base64Image = base64Photo.substring(commaIndex + 1);
 
 					try {
@@ -141,27 +144,27 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 						String timestamp = String.valueOf(System.currentTimeMillis());
 						String imageName = "image_" + timestamp + ".jpg";
-						String imagePath = "C:/Users/iql20/OneDrive/®à­±/htmlfile/2023-12-25/public/" + imageName;
+						String imagePath = "C:/Users/iql20/OneDrive/ï¿½à­±/htmlfile/2023-12-25/public/" + imageName;
 
 						FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
 						fileOutputStream.write(decodedBytes);
 						fileOutputStream.close();
 
-						// ±NÀÉ®×¸ô®|³]¸m¨ì userInfo ¤¤
+						// ï¿½Nï¿½É®×¸ï¿½ï¿½|ï¿½]ï¿½mï¿½ï¿½ userInfo ï¿½ï¿½
 						existingUserInfo.setUserPhoto(imagePath);
 					} catch (IOException e) {
-						// ³B²z¨Ò¥~
+						// ï¿½Bï¿½zï¿½Ò¥~
 						e.printStackTrace();
 					}
 				}
 			}
 
-			// Àx¦s§ó·s«áªº¸ê®Æ
+			// ï¿½xï¿½sï¿½ï¿½sï¿½áªºï¿½ï¿½ï¿½
 			UserInfo savedUserInfo = userInfoDao.save(existingUserInfo);
 			return new UserInfoResponse(savedUserInfo);
 		} else {
-			// §ä¤£¨ì­n§ó·sªº¸ê®Æ
-			return new UserInfoResponse(); // ©ÎªÌ¾A·íªº¿ù»~³B²z
+			// ï¿½ä¤£ï¿½ï¿½nï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½
+			return new UserInfoResponse(); // ï¿½ÎªÌ¾Aï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½Bï¿½z
 		}
 	}
 
@@ -172,10 +175,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 //
 //		String base64Photo = userInfo.getUserPhoto();
 //		if (base64Photo != null && !base64Photo.isEmpty()) {
-//			// §ä¨ì³r¸¹ªº¦ì¸m
+//			// ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½m
 //			int commaIndex = base64Photo.indexOf(',');
 //			if (commaIndex != -1) {
-//				// ºI¨ú³r¸¹«áªº³¡¤À
+//				// ï¿½Iï¿½ï¿½ï¿½rï¿½ï¿½ï¿½áªºï¿½ï¿½ï¿½ï¿½
 //				String base64Image = base64Photo.substring(commaIndex + 1);
 //
 //				try {
@@ -183,16 +186,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 //
 //					String timestamp = String.valueOf(System.currentTimeMillis());
 //					String imageName = "image_" + timestamp + ".jpg";
-//					String imagePath = "C:/Users/iql20/OneDrive/®à­±/pic/" + imageName;
+//					String imagePath = "C:/Users/iql20/OneDrive/ï¿½à­±/pic/" + imageName;
 //
 //					FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
 //					fileOutputStream.write(decodedBytes);
 //					fileOutputStream.close();
 //
-//					// ±NÀÉ®×¸ô®|³]¸m¨ì userInfo ¤¤
+//					// ï¿½Nï¿½É®×¸ï¿½ï¿½|ï¿½]ï¿½mï¿½ï¿½ userInfo ï¿½ï¿½
 //					userInfo.setUserPhoto(imagePath);
 //				} catch (IOException e) {
-//					// ³B²z¨Ò¥~
+//					// ï¿½Bï¿½zï¿½Ò¥~
 //					e.printStackTrace();
 //				}
 //			}
@@ -202,9 +205,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 //		return new UserInfoResponse(saveduserInfo);
 //	}
 
-	// ÀË¬d±K½X¬O§_¦³§ó§ïªº»²§U¤èªk
+	// ï¿½Ë¬dï¿½Kï¿½Xï¿½Oï¿½_ï¿½ï¿½ï¿½ï¿½ïªºï¿½ï¿½ï¿½Uï¿½ï¿½k
 	private boolean isPasswordChanged(UserInfo newUserInfo, UserInfo originalUserInfo) {
-		// ÀË¬d±K½X¬O§_¬Û¦P
+		// ï¿½Ë¬dï¿½Kï¿½Xï¿½Oï¿½_ï¿½Û¦P
 		return newUserInfo.getPassword() != null && !newUserInfo.getPassword().isEmpty()
 				&& !encoder.matches(newUserInfo.getPassword(), originalUserInfo.getPassword());
 
