@@ -55,11 +55,13 @@ public class PetInfoServiceImpl implements PetInfoService{
 		PetInfo lastPet = petDao.findTopByUserIdOrderByPetIdDesc(pet.getUserId());
 		if(lastPet == null) {
 			pet.setPetId("P" + pet.getUserId() + "01");
+		} else {
+			String lastPetId = lastPet.getPetId();
+			String numericPart = lastPetId.substring(1);// 获取字符串的第二个字符开始的部分
+			long lastPetIdLong = Long.parseLong(numericPart); // 将提取的字符串部分转换为 long 类型
+			pet.setPetId("P" + (lastPetIdLong+1) );
 		}
-		String lastPetId = lastPet.getPetId();
-		String numericPart = lastPetId.substring(1);// 获取字符串的第二个字符开始的部分
-		long lastPetIdLong = Long.parseLong(numericPart); // 将提取的字符串部分转换为 long 类型
-		pet.setPetId("P" + (lastPetIdLong+1) );
+		
 		
 		
 		// save to DB
@@ -85,7 +87,6 @@ public class PetInfoServiceImpl implements PetInfoService{
 		if(userId == 0 || userId < 0) {
 			return new PetInfoListResponse(null, RtnCode.PARAM_ERROR);
 		}
-		
 		
 		// check if the userId is exiest
 		Optional<UserInfo> check = userDao.findById(userId);
@@ -161,6 +162,23 @@ public class PetInfoServiceImpl implements PetInfoService{
 		}
 		
 		return new PetInfoResponse(null, RtnCode.SUCCESSFUL);
+	}
+
+
+
+	@Override
+	public PetInfoListResponse getAdoptPetList(int userId) {
+		
+		// check parameters
+		if(userId == 0 || userId < 0) {
+			return new PetInfoListResponse(null, RtnCode.PARAM_ERROR);
+		}
+		
+		String StrId = Integer.toString(userId);
+		
+		List<PetInfo> res = petDao.findAllByAdopterIdListContaining(StrId);
+		
+		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
 	}
 
 }

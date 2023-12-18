@@ -25,9 +25,9 @@ public class PetTest {
 //		adoptionStatus, age, vaccine, petProfile, 
 //		ligation, type, petPhoto, petOtherPhoto, locaiton
 		
-		PetInfo pet = new PetInfo(8, "小花", "三花", "健康", 
+		PetInfo pet = new PetInfo(52, "小黑", "柴犬", "健康", 
 				"正常", "五個月", "三合一疫苗;狂犬病疫苗", null, 
-				false, "貓", null, null);
+				false, "狗", null, null);
 		PetInfoRequest req = new PetInfoRequest(pet);
 		PetInfoResponse res = petService.createPet(req);
 		System.out.println(res.getRtnCode().getMessage());
@@ -61,6 +61,13 @@ public class PetTest {
 	public void deleteTest() {
 		PetInfoResponse res = petService.deletePet("P805", 8);
 		System.out.println(res.getRtnCode().getMessage());
+	}
+	
+	
+	@Test
+	public void getAdoptPetList() {
+		int userId = 55;
+		
 	}
 	
 }
