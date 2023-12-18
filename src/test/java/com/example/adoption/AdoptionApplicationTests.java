@@ -53,7 +53,7 @@ class AdoptionApplicationTests {
 		assertNotNull(existingUserInfo);
 
 		// 嚙踝蕭s嚙諉使用者迎蕭嚙踝蕭嚙�
-		existingUserInfo.setUserName("嚙踝蕭"); // 嚙踝蕭s嚙諄歹蕭W嚙踝蕭
+		existingUserInfo.setUserName("嚙踝蕭"); // 嚙踝蕭s嚙諄歹蕭W嚙踝
 
 		// 嚙請建一嚙踝蕭 UserInfoRequest 嚙踝蕭嚙踝蕭
 		UserInfoRequest req = new UserInfoRequest(existingUserInfo);
