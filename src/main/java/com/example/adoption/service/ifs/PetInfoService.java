@@ -18,7 +18,18 @@ public interface PetInfoService {
 	// delete the pet's info
 	public PetInfoResponse deletePet(String petId, int userId);
 	
+	
+	//==========================
+	//尚未寫進controller
+	
+	
+	// add the user to adopter id list
+	public PetInfoResponse adoptPet(String petId, int userId);
+	
 	// the user's adopt pet list
 	public PetInfoListResponse getAdoptPetList(int userId);
+	
+	// all adoptable pets
+	public PetInfoListResponse getAdoptablePetList();
 	
 }

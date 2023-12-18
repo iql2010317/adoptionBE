@@ -50,7 +50,11 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 			@Param("location")String location);
 	
 	
+//	@Query("SELECT pet FROM PetInfo pet WHERE CONCAT(',', pet.adopterIdList, ',') LIKE %:userId%")
+	@Query(value = "SELECT * FROM pet_info WHERE FIND_IN_SET(:userId, adopter_id_list) > 0", nativeQuery = true)
+	public List<PetInfo> findAllByAdopterIdListContaining(@Param("userId")String userId);
 	
-	public List<PetInfo> findAllByAdopterIdListContaining(String userId);
+	
+	public List<PetInfo> findAllByAdoptionStatus(String adoptionStatus);
 	
 }

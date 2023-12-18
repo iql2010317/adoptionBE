@@ -58,7 +58,7 @@ public class PetInfo {
 	@Column(name = "vaccine")
 	private String vaccine;
 
-	@JsonProperty("pet_peofile")
+	@JsonProperty("pet_profile")
 	@Column(name = "pet_profile")
 	private String petProfile;
 
