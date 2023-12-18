@@ -19,7 +19,9 @@ public enum RtnCode {
 	UPDATE_FAILED(400, "Update failed!!"), //
 	UPDATE_ERROR(400, "DB error!!"),//
 	ACCOUNT_DEACTIVATE(400, "Account deactivate!!"), //
-	SAVE_DB_ERROR(400, "Save DB error!!");
+	SAVE_DB_ERROR(400, "Save DB error!!"),
+	THE_PET_CANNOT_BE_ADOPTED(400, "The pet cannot be adopted!!"),
+	ADOPT_ERROR(400, "Adopt error!!");
 	
 
 
