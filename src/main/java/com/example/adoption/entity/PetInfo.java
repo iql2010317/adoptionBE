@@ -1,5 +1,7 @@
 package com.example.adoption.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,30 +16,39 @@ public class PetInfo {
 	
 	/* parameters */
 	@Id
+	@JsonProperty("pet_id")
 	@Column(name = "pet_id")
 	private String petId;
 
+	@JsonProperty("user_id")
 	@Column(name = "user_id")
 	private int userId;
 
+	@JsonProperty("pet_name")
 	@Column(name = "pet_name")
 	private String petName; 
 
+	@JsonProperty("adopter_id_list")
 	@Column(name = "adopter_id_list")
 	private String adopterIdList;
 
+	@JsonProperty("final_adopter_id")
 	@Column(name = "final_adopter_id")
 	private int finalAdopterId; 
 
+	@JsonProperty("pet_breed")
 	@Column(name = "pet_breed")
 	private String petBreed;
 
+	@JsonProperty("pet_status")
 	@Column(name = "pet_status")
 	private String petStatus;
 
+	@JsonProperty("adoption_status")
 	@Column(name = "adoption_status")
 	private String adoptionStatus;
 
+	@JsonProperty("adoption_conditions")
 	@Column(name = "adoption_conditions")
 	private String adoptionConditions;
 
@@ -47,6 +58,7 @@ public class PetInfo {
 	@Column(name = "vaccine")
 	private String vaccine;
 
+	@JsonProperty("pet_peofile")
 	@Column(name = "pet_profile")
 	private String petProfile;
 
@@ -56,14 +68,16 @@ public class PetInfo {
 	@Column(name = "type")
 	private String type;
 
+	@JsonProperty("pet_photo")
 	@Column(name = "pet_photo")
 	private String petPhoto;
 
+	@JsonProperty("pet_other_photo")
 	@Column(name = "pet_other_photo")
 	private String petOtherPhoto;
 	
 	@Column(name = "location")
-	private String locaiton;
+	private String location;
 
 	public PetInfo() {
 		super();
@@ -73,7 +87,7 @@ public class PetInfo {
 	
 
 	public PetInfo(int userId, String petName, String petBreed, String petStatus, String adoptionStatus, String age,
-			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String locaiton) {
+			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String location) {
 		super();
 		this.userId = userId;
 		this.petName = petName;
@@ -86,18 +100,34 @@ public class PetInfo {
 		this.ligation = ligation;
 		this.type = type;
 		this.petPhoto = petPhoto;
-		this.locaiton = locaiton;
+		this.location = location;
 	}
+	
+	
 
 
-
-	public PetInfo(int userId, String petName, String adoptionStatus, String type) {
+	public PetInfo(String petId, int userId, String petName, String petBreed, String petStatus, String adoptionStatus,
+			String adoptionConditions, String age, String vaccine, String petProfile, boolean ligation, String type,
+			String petPhoto, String petOtherPhoto, String location) {
 		super();
+		this.petId = petId;
 		this.userId = userId;
 		this.petName = petName;
+		this.petBreed = petBreed;
+		this.petStatus = petStatus;
 		this.adoptionStatus = adoptionStatus;
+		this.adoptionConditions = adoptionConditions;
+		this.age = age;
+		this.vaccine = vaccine;
+		this.petProfile = petProfile;
+		this.ligation = ligation;
 		this.type = type;
+		this.petPhoto = petPhoto;
+		this.petOtherPhoto = petOtherPhoto;
+		this.location = location;
 	}
+
+
 
 	/* getter&setter */
 	public String getPetId() {
@@ -229,11 +259,11 @@ public class PetInfo {
 	}
 
 	public String getLocaiton() {
-		return locaiton;
+		return location;
 	}
 
-	public void setLocaiton(String locaiton) {
-		this.locaiton = locaiton;
+	public void setLocaiton(String location) {
+		this.location = location;
 	}
 	
 	

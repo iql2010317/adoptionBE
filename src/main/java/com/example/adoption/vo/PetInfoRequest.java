@@ -11,11 +11,6 @@ public class PetInfoRequest extends PetInfo{
 		// TODO Auto-generated constructor stub
 	}
 
-	public PetInfoRequest(int userId, String petName, String adoptionStatus, String type) {
-		super(userId, petName, adoptionStatus, type);
-		// TODO Auto-generated constructor stub
-	}
-
 	public PetInfoRequest(PetInfo petInfo) {
 		super();
 		this.petInfo = petInfo;
