@@ -101,7 +101,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			message.setSubject("寵物會員認證碼");
 
 			// 設定信件內容
-			message.setText("使用此代碼作為第一次登入密碼" + randomString);
+			message.setText("使用此代碼作為註冊認證碼" + randomString);
 
 			// 發送信件
 			Transport.send(message);
@@ -197,7 +197,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 				Duration duration = Duration.between(randomStringTime, currentTime);
 				long minutesPassed = duration.toMinutes();
 
-				if (minutesPassed <= 90 && password.equals(userInfo.getRegisterRandomString())) {
+				if (minutesPassed <= 30 && password.equals(userInfo.getRegisterRandomString())) {
 					// 登入成功並開通帳號
 					userInfo.setHasOpened(true);
 					userInfo.setRandomStringTime(null);
@@ -389,7 +389,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			message.setSubject("寵物會員認證碼");
 
 			// 設定信件內容
-			message.setText("使用此代碼作為第一次登入密碼" + randomString);
+			message.setText("使用此代碼作為臨時登入密碼" + randomString);
 
 			// 發送信件
 			Transport.send(message);
