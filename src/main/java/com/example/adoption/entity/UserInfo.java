@@ -25,14 +25,14 @@ public class UserInfo {
 
 //	@Id
 	@Column(name = "account")
-	private String account; // PK2 //¼È®Éµù¸Ñ
+	private String account; // PK2 //ï¿½È®Éµï¿½ï¿½ï¿½
 
 	@Column(name = "password")
 	private String password;
 
 //	@Id
 	@Column(name = "email")
-	private String email; /// ¼È®Éµù¸Ñ
+	private String email; /// ï¿½È®Éµï¿½ï¿½ï¿½
 
 	@Column(name = "phone")
 	private String phone;
