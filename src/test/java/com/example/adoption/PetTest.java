@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.adoption.entity.PetInfo;
+import com.example.adoption.service.ifs.PetAdoptionService;
 import com.example.adoption.service.ifs.PetInfoService;
+import com.example.adoption.vo.PetAdoptionResponse;
 import com.example.adoption.vo.PetInfoListResponse;
 import com.example.adoption.vo.PetInfoRequest;
 import com.example.adoption.vo.PetInfoResponse;
@@ -25,9 +27,9 @@ public class PetTest {
 //		adoptionStatus, age, vaccine, petProfile, 
 //		ligation, type, petPhoto, petOtherPhoto, locaiton
 		
-		PetInfo pet = new PetInfo(52, "小紅", "狐狸狗", "健康", 
+		PetInfo pet = new PetInfo(52, "小花", "三花貓", "健康", 
 				"送養中", "五個月", "狂犬病疫苗", null, 
-				false, "狗", null, null);
+				false, "貓", null, null);
 		PetInfoRequest req = new PetInfoRequest(pet);
 		PetInfoResponse res = petService.createPet(req);
 		System.out.println(res.getRtnCode().getMessage());
@@ -86,5 +88,28 @@ public class PetTest {
 		System.out.println(res.getRtnCode().getMessage());
 		System.out.println(res.getPetInfoList().size());
 	}
+	
+	
+	
+	
+	// ======================================
+	// adoption
+	
+	
+	@Autowired
+	private PetAdoptionService petAdoptionService;
+	
+	@Test
+	public void ownerConfirmTest() {
+		PetAdoptionResponse res = petAdoptionService.ownerConfirm("P5204", 52, 57);
+		System.out.println(res.getRtnCode().getMessage());
+	}
+	
+	@Test
+	public void adopterConfirmTest() {
+		PetAdoptionResponse res = petAdoptionService.adopterConfirm("P5204", 52, 57, 1);
+		System.out.println(res.getRtnCode().getMessage());
+	}
+	
 	
 }

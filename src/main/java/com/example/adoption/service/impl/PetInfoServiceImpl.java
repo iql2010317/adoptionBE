@@ -169,7 +169,6 @@ public class PetInfoServiceImpl implements PetInfoService{
 	
 	
 	//==========================
-	//尚未寫進controller
 	
 	
 	

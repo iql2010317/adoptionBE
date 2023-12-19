@@ -51,7 +51,6 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	
 	
 
-//	@Query("SELECT pet FROM PetInfo pet WHERE CONCAT(',', pet.adopterIdList, ',') LIKE %:userId%")
 	@Query(value = "SELECT * FROM pet_info WHERE FIND_IN_SET(:userId, adopter_id_list) > 0", nativeQuery = true)
 	public List<PetInfo> findAllByAdopterIdListContaining(@Param("userId")String userId);
 	
@@ -61,5 +60,26 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	public List<PetInfo> findAllByAdoptionStatusAndTypeContaining(String adoption, String type);
 	
 	public List<PetInfo> findAllByAdoptionStatusAndTypeContainingAndLocationContaining(String adoption, String type, String location);
+	
+	
+	// ==============================================
+	// adoption
+	
+	
+	@Query(value = "SELECT COUNT(*) FROM pet_info p WHERE FIND_IN_SET(:userId, p.adopter_id_list) > 0 AND p.pet_id = :petId", nativeQuery = true)
+	public int findByPetIdAndAdopterIdListContaining(@Param("petId") String petId, @Param("userId") String userId);
+	
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(value = "UPDATE PetInfo AS pet SET"
+			+ " finalAdopterId = CASE WHEN :finalAdopterId is null THEN pet.finalAdopterId ELSE :finalAdopterId END,"
+			+ " adoptionStatus = CASE WHEN :adoptionStatus is null THEN pet.adoptionStatus ELSE :adoptionStatus END"
+			+ " WHERE pet.petId = :petId")
+	public int updateFinalAdopterIdAndAdoptionStatus(
+			@Param("petId")String petId,
+			@Param("finalAdopterId")int finalAdopterId, 
+			@Param("adoptionStatus")String adoptionStatus);
+
+
 	
 }

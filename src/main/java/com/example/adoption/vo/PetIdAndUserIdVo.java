@@ -1,6 +1,6 @@
 package com.example.adoption.vo;
 
-public class PetIdUserIdVo {
+public class PetIdAndUserIdVo {
 
 	
 	
@@ -14,13 +14,13 @@ public class PetIdUserIdVo {
 	
 	
 	/* constructors */
-	public PetIdUserIdVo() {
+	public PetIdAndUserIdVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public PetIdUserIdVo(String petId, int userId) {
+	public PetIdAndUserIdVo(String petId, int userId) {
 		super();
 		this.petId = petId;
 		this.userId = userId;

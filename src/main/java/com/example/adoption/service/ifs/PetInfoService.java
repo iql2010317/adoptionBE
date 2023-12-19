@@ -21,7 +21,6 @@ public interface PetInfoService {
 	
 	
 	//==========================
-	//尚未寫進controller
 	
 	
 	// add the user to adopter id list
@@ -32,5 +31,11 @@ public interface PetInfoService {
 	
 	// all adoptable pets
 	public PetInfoListResponse getAdoptablePetList(String type, String location);
+	
+	
+	//==========================
+	//尚未寫進controller
+	
+	
 	
 }
