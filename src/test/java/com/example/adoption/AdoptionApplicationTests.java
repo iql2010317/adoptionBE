@@ -109,4 +109,11 @@ class AdoptionApplicationTests {
 
 	}
 
+	@Test
+	void searchTest() {
+		UserInfoResponse res = userInfoService.searchById(53);
+		UserInfo user = res.getUserInfo();
+		System.out.println(user.getAccount());
+	}
+
 }
