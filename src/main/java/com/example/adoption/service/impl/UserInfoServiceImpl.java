@@ -499,14 +499,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return "成功更新密碼，請重新登入";
 	}
-<<<<<<< HEAD
 
 	@Override
 	public UserInfoResponse searchById(int userId) {
 		UserInfo userInfo = userInfoDao.findByUserId(userId);
 		return new UserInfoResponse(userInfo);
 	}
-=======
->>>>>>> pet_adoption
+
 
 }
