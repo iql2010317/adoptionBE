@@ -58,4 +58,6 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	
 	public List<PetInfo> findAllByAdoptionStatus(String adoptionStatus);
 	
+	
+	
 }
