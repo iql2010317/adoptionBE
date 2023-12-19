@@ -21,7 +21,9 @@ public enum RtnCode {
 	ACCOUNT_DEACTIVATE(400, "Account deactivate!!"), //
 	SAVE_DB_ERROR(400, "Save DB error!!"),
 	THE_PET_CANNOT_BE_ADOPTED(400, "The pet cannot be adopted!!"),
-	ADOPT_ERROR(400, "Adopt error!!");
+	ADOPT_ERROR(400, "Adopt error!!"),
+	NOT_FOUND(404, "Not found!!"),
+	THE_ADOPTER_IS_NOT_IN_THE_LIST(400, "The adopter is not in the list!!");
 	
 
 

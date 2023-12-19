@@ -166,6 +166,14 @@ public class PetInfoServiceImpl implements PetInfoService{
 	}
 	
 	
+	
+	
+	//==========================
+	
+	
+	
+	
+	
 	@Override
 	public PetInfoResponse adoptPet(String petId, int userId) {
 		
@@ -255,21 +263,32 @@ public class PetInfoServiceImpl implements PetInfoService{
 
 
 	@Override
-	public PetInfoListResponse getAdoptablePetList() {
-		List<PetInfo> res = petDao.findAllByAdoptionStatus("送養中");
+	public PetInfoListResponse getAdoptablePetList(String type, String location) {
+		
+		String searchType = type;
+		String searchLocation = location;
+		
+		// check if the parameter is null, set ""
+		if(type == null) {
+			searchType = ""; 
+		}
+		if(location == null) {
+			searchLocation = "";
+		}
+		
+//		List<PetInfo> res = petDao.findAllByAdoptionStatus("送養中");
+//		List<PetInfo> res = petDao.findAllByAdoptionStatusAndTypeContaining("送養中", searchType);
+		List<PetInfo> res = petDao.findAllByAdoptionStatusAndTypeContainingAndLocationContaining("送養中", searchType, searchLocation);
+		
+		if(res.isEmpty()) {
+			return new PetInfoListResponse(res, RtnCode.NOT_FOUND);
+		}
+		
 		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
 	}
 
 
 
 	
-
-
-
-	@Override
-	public PetInfoListResponse getAdoptList(int userId) {
-		// TODO Auto-generated method stub
-		return new PetInfoListResponse(null, RtnCode.SUCCESSFUL);
-	}
 
 }

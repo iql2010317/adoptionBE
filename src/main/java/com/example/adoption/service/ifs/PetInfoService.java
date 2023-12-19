@@ -18,11 +18,9 @@ public interface PetInfoService {
 	// delete the pet's info
 	public PetInfoResponse deletePet(String petId, int userId);
 	
-	// find the user's adopt list
-	public PetInfoListResponse getAdoptList(int userId);
+	
 	
 	//==========================
-	//尚未寫進controller
 	
 	
 	// add the user to adopter id list
@@ -32,6 +30,12 @@ public interface PetInfoService {
 	public PetInfoListResponse getAdoptPetList(int userId);
 	
 	// all adoptable pets
-	public PetInfoListResponse getAdoptablePetList();
+	public PetInfoListResponse getAdoptablePetList(String type, String location);
+	
+	
+	//==========================
+	//尚未寫進controller
+	
+	
 	
 }
