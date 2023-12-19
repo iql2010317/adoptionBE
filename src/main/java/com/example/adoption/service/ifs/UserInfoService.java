@@ -5,29 +5,33 @@ import com.example.adoption.vo.UserInfoResponse;
 
 public interface UserInfoService {
 
-	// µù¥UÅÞ¿è (for user or admin
+	// sg
 	public UserInfoResponse create(UserInfoRequest req);
 
-	// µù¥UÅÞ¿è +¥[¤J¤ñ¹ï»{ÃÒ½X
+	// ï¿½ï¿½ï¿½Uï¿½Þ¿ï¿½ +ï¿½[ï¿½Jï¿½ï¿½ï¿½{ï¿½Ò½X
 	public UserInfoResponse compareAuthenticationCode(UserInfoRequest req);
 
-	// ¥þÅé¤H­û¦Cªí·j´M (for admin
+	// ï¿½ï¿½ï¿½ï¿½Hï¿½ï¿½ï¿½Cï¿½ï¿½jï¿½M (for admin
 	public UserInfoResponse search();
+	
+	// for pet search user
+	public UserInfoResponse searchById(int userId);
 
-	// µn¤JÅÞ¿è (for user or admin
+	// ï¿½nï¿½Jï¿½Þ¿ï¿½ (for user or admin
 	public String userLogin(String email, String password);
 
-	// §ó·sÅÞ¿è (for user or admin
+	// ï¿½ï¿½sï¿½Þ¿ï¿½ (for user or admin
 	public UserInfoResponse update(UserInfoRequest req);
 
-	// ¥Î¤á §Ñ°O±K½X
+	// ï¿½Î¤ï¿½ ï¿½Ñ°Oï¿½Kï¿½X
 	public String userFogetPassword(String email);
 
-	// µù¥U¥Î¤á µo°e»{ÃÒ½X
+	// ï¿½ï¿½ï¿½Uï¿½Î¤ï¿½ ï¿½oï¿½eï¿½{ï¿½Ò½X
 	public String sendAuthenticationCode(String email);
 
-	// ¤wµù¥U¥Î¤á §Ñ°O±K½X 
-	//¨Ï¥Î6¦ìÀH¾÷½Xµn¤J«á ±j¨î§ó§ï±K½X
+	// ï¿½wï¿½ï¿½ï¿½Uï¿½Î¤ï¿½ ï¿½Ñ°Oï¿½Kï¿½X 
+	//ï¿½Ï¥ï¿½6ï¿½ï¿½ï¿½Hï¿½ï¿½ï¿½Xï¿½nï¿½Jï¿½ï¿½ ï¿½jï¿½ï¿½ï¿½ï¿½Kï¿½X
 	public String forceChangePassword(String email, String newPassword, String confirmPassword);
+	
 
 }

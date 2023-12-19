@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.adoption.entity.UserInfo;
 
-//@Repository   //¼È®É¤£¥Î
+//@Repository   //ï¿½È®É¤ï¿½ï¿½ï¿½
 //public interface UserInfoDao extends JpaRepository<UserInfo, UserInfoId> {
 //
 //}
@@ -16,5 +16,7 @@ public interface UserInfoDao extends JpaRepository<UserInfo, Integer> {
 	UserInfo findByAccount(String account);
 
 	UserInfo findByEmail(String email);
+
+	UserInfo findByUserId(int userId);
 
 }
