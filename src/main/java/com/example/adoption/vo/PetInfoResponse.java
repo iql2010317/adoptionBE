@@ -5,10 +5,16 @@ import com.example.adoption.entity.PetInfo;
 
 public class PetInfoResponse {
 	
+	
+	
+	/* parameters */
 	private PetInfo petInfo;
 
 	private RtnCode rtnCode;
 
+	
+	
+	/* constructors */
 	public PetInfoResponse() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -19,6 +25,10 @@ public class PetInfoResponse {
 		this.petInfo = petInfo;
 		this.rtnCode = rtnCode;
 	}
+	
+	
+	
+	/* getter&setter*/
 
 	public PetInfo getPetInfo() {
 		return petInfo;
@@ -35,6 +45,7 @@ public class PetInfoResponse {
 	public void setRtnCode(RtnCode rtnCode) {
 		this.rtnCode = rtnCode;
 	}
+
 	
 	
 }

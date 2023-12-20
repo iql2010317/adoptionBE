@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.adoption.service.ifs.PetInfoService;
 import com.example.adoption.vo.PetIdAndUserIdVo;
+import com.example.adoption.vo.PetInfoAndUserInfoResponse;
 import com.example.adoption.vo.PetInfoListResponse;
 import com.example.adoption.vo.PetInfoRequest;
 import com.example.adoption.vo.PetInfoResponse;
@@ -52,6 +53,14 @@ public class PetInfoController {
 	}
 	
 	
+	// get the pet info of adopted pet
+	@GetMapping(value = "api/adoption/petInfo/getAdoptPetInfoAndUserInfo")
+	public PetInfoAndUserInfoResponse getAdoptPetInfoAndUserInfo(@RequestParam(value = "petId") String petId) {
+		return petInfoService.getAdoptPetInfoAndUserInfo(petId);
+	}
+	
+	
+	
 	// =================================
 	// adoption
 	
@@ -73,4 +82,6 @@ public class PetInfoController {
 	public PetInfoListResponse getAdoptablePetList(@RequestParam(value = "type") String type,@RequestParam(value = "location") String location) {
 		return petInfoService.getAdoptablePetList(type, location);
 	}
+	
+	
 }

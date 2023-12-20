@@ -19,11 +19,13 @@ public enum RtnCode {
 	UPDATE_FAILED(400, "Update failed!!"), //
 	UPDATE_ERROR(400, "DB error!!"),//
 	ACCOUNT_DEACTIVATE(400, "Account deactivate!!"), //
-	SAVE_DB_ERROR(400, "Save DB error!!"),
-	THE_PET_CANNOT_BE_ADOPTED(400, "The pet cannot be adopted!!"),
-	ADOPT_ERROR(400, "Adopt error!!"),
-	NOT_FOUND(404, "Not found!!"),
-	THE_ADOPTER_IS_NOT_IN_THE_LIST(400, "The adopter is not in the list!!");
+	SAVE_DB_ERROR(400, "Save DB error!!"), //
+	THE_PET_CANNOT_BE_ADOPTED(400, "The pet cannot be adopted!!"), //
+	ADOPT_ERROR(400, "Adopt error!!"), //
+	NOT_FOUND(404, "Not found!!"), //
+	THE_ADOPTER_IS_NOT_IN_THE_LIST(400, "The adopter is not in the list!!"), //
+	THE_USER_HAS_ALREADY_ADOPTED_THE_PET(400, "The user has already adopted the pet!!"), //
+	REJECT_ERROR(400, "Reject error!!");
 	
 
 

@@ -66,9 +66,13 @@ public class PetTest {
 	}
 	
 	
+	
+	// adopt
+	
+	
 	@Test
 	public void adoptPetTest() {
-		PetInfoResponse res = petService.adoptPet("P5202", 52);
+		PetInfoResponse res = petService.adoptPet("P5202", 57);
 		System.out.println(res.getRtnCode().getMessage());
 	}
 	
@@ -90,10 +94,25 @@ public class PetTest {
 	}
 	
 	
+	// adopter quit
+	@Test
+	public void quitAdoptPetTest() {
+		PetInfoResponse res = petService.quitAdoptPet("P5202", 57);
+		System.out.println(res.getRtnCode().getMessage());
+	}
+	
+	
+	// owner reject
+	@Test
+	public void rejectAdoptPetTest() {
+		PetInfoResponse res = petService.rejectAdoptPet("P5202", 52, 7);
+		System.out.println(res.getRtnCode().getMessage());
+	}
+	
 	
 	
 	// ======================================
-	// adoption
+	// pet_adoption
 	
 	
 	@Autowired
@@ -111,5 +130,6 @@ public class PetTest {
 		System.out.println(res.getRtnCode().getMessage());
 	}
 	
+
 	
 }
