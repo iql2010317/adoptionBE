@@ -21,6 +21,7 @@ import com.example.adoption.vo.PetInfoAndUserInfoVo;
 import com.example.adoption.vo.PetInfoListResponse;
 import com.example.adoption.vo.PetInfoRequest;
 import com.example.adoption.vo.PetInfoResponse;
+import com.example.adoption.vo.UserInfoResponse;
 
 
 @Service
@@ -273,20 +274,153 @@ public class PetInfoServiceImpl implements PetInfoService {
 
 	@Override
 	public PetInfoResponse quitAdoptPet(String petId, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// check parameters
+		if(userId == 0 || userId < 0) {
+			return new PetInfoResponse(null, RtnCode.PARAM_ERROR);
+		}
+		
+		// check if the pet info exist
+		Optional<PetInfo> check = petDao.findById(petId);
+		if(check.isEmpty()) {
+			return new PetInfoResponse(null, RtnCode.ID_NOT_FOUND);
+		}
+		
+		
+		// reset the adopter id list
+		PetInfo pet = check.get();
+		
+		// let the string change the type to array
+		String strAdopterIdList = pet.getAdopterIdList();
+		String strUserId = Integer.toString(userId);
+		
+		// 1. 将逗号分隔的字符串拆分为数组
+        String[] strArray = strAdopterIdList.split(",");
+        
+        // 2. 移除指定值
+        String strToRemove = strUserId;
+        List<String> list = new ArrayList<>(Arrays.asList(strArray));
+        list.remove(strToRemove);
+
+        // 3. 將array轉回string
+        String newStr = String.join(",", list.toArray(new String[0]));
+
+        // 打印结果
+//        System.out.println("Original String: " + strAdopterIdList);
+//        System.out.println("Original Array: " + Arrays.toString(strArray));
+//        System.out.println("Value to Remove: " + strToRemove);
+//        System.out.println("New Array: " + Arrays.toString(list.toArray(new String[0])));
+//        System.out.println("New String: " + newStr);
+        
+        pet.setAdopterIdList(newStr);
+        
+        
+        // sysout the pet
+        System.out.println("adopter id list of the pet: " + pet.getAdopterIdList());
+        
+        // save to DB
+ 		// use try/catch
+ 		try {
+ 			petDao.save(pet);
+ 		} catch (Exception e) {
+ 			System.out.println(e.getMessage());
+ 			return new PetInfoResponse(null, RtnCode.SAVE_DB_ERROR);
+ 		}
+		
+		
+		return new PetInfoResponse(pet, RtnCode.SUCCESSFUL);
 	}
 
+
+
+	// owner reject
 	@Override
 	public PetInfoResponse rejectAdoptPet(String petId, int ownerId, int adopterId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		// check parameters, or if the owner id = adopter id
+		if( !StringUtils.hasText(petId) || ownerId == 0 || ownerId < 0 || adopterId == 0 || adopterId < 0 || ownerId == adopterId) {
+			return new PetInfoResponse(null, RtnCode.PARAM_ERROR);
+		}
+		
+		// check if the pet info exist
+		Optional<PetInfo> check = petDao.findById(petId);
+		if(check.isEmpty()) {
+			return new PetInfoResponse(null, RtnCode.ID_NOT_FOUND);
+		}
+		
+		PetInfo pet = check.get();
+		
+		// check if the owner id is the pet's user id
+		if(pet.getUserId() != ownerId) {
+			return new PetInfoResponse(null, RtnCode.REJECT_ERROR);
+		}
+		
+		// let the string change the type to array
+		String strAdopterIdList = pet.getAdopterIdList();
+		String strUserId = Integer.toString(adopterId);
+		
+		// 1. 将逗号分隔的字符串拆分为数组
+        String[] strArray = strAdopterIdList.split(",");
+        
+        // 2. 移除指定值
+        List<String> list = new ArrayList<>(Arrays.asList(strArray));
+        list.remove(strUserId);
+        
+
+        // 3. 將array轉回string
+        String newStr = String.join(",", list.toArray(new String[0]));
+		
+        // set the new adopter id list back to the pet
+        pet.setAdopterIdList(newStr);
+        
+        
+        // sysout the pet
+        System.out.println("adopter id list of the pet: " + pet.getAdopterIdList());
+        
+        
+        // save to DB
+ 		// use try/catch
+ 		try {
+ 			petDao.save(pet);
+ 		} catch (Exception e) {
+ 			System.out.println(e.getMessage());
+ 			return new PetInfoResponse(null, RtnCode.SAVE_DB_ERROR);
+ 		}
+		
+		return new PetInfoResponse(pet, RtnCode.SUCCESSFUL);
 	}
 
+
+
+	@Autowired
+	private UserInfoService userInfoService;
+	
 	@Override
 	public PetInfoAndUserInfoResponse getAdoptPetInfoAndUserInfo(String petId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// check the parameter
+		if(!StringUtils.hasText(petId)) {
+			return new PetInfoAndUserInfoResponse(null, RtnCode.PARAM_ERROR);
+		}
+		
+		// check if the pet id exist
+		Optional<PetInfo> check = petDao.findById(petId);
+		if(check.isEmpty()) {
+			return new PetInfoAndUserInfoResponse(null, RtnCode.ID_NOT_FOUND);
+		}
+		
+		// get the pet info
+		PetInfo pet = check.get();
+		
+		// get the user
+		UserInfoResponse userRes = userInfoService.searchById(pet.getUserId());
+		UserInfo user = userRes.getUserInfo();
+		
+		// set the pet info and the user info to the vo
+		PetInfoAndUserInfoVo vo = new PetInfoAndUserInfoVo(pet, user);
+		
+		return new PetInfoAndUserInfoResponse(vo, RtnCode.SUCCESSFUL);
 	}
 
 
