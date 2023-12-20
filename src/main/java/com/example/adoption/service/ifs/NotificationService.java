@@ -14,4 +14,6 @@ public interface NotificationService {
 	public NotificationRes Noti(NotificationReq req);
 
 	public NotificationRes getNoti(int userId);
+
+	public NotificationRes setNotiRead(int userId);
 }

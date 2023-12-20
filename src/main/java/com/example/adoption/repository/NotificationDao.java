@@ -17,4 +17,5 @@ public interface NotificationDao extends JpaRepository<Notification, Integer>{
 	@Query(value = "SELECT * FROM notification n WHERE n.user_id = :userId", nativeQuery = true)
 	public List<Notification> selectNotificationByUserId(@Param("userId")int userId);
 
+	
 }

@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT '0',
@@ -8,5 +7,6 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `msg` varchar(100) DEFAULT NULL,
   `isread` tinyint DEFAULT '0',
   `date_time` datetime DEFAULT NULL,
+  `notifi_type` int DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -42,4 +42,10 @@ public class NotificationController {
 		
 		return service.getNoti(userId);
 	}
+
+	@PostMapping(value = "api/notification/setNotiRead")
+	public NotificationRes setNotiRead(@RequestParam(name = "userId") int userId) {
+		
+		return service.setNotiRead(userId);
+	}
 }
