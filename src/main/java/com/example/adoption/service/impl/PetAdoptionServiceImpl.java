@@ -12,7 +12,10 @@ import com.example.adoption.entity.PetInfo;
 import com.example.adoption.repository.PetAdoptionDao;
 import com.example.adoption.repository.PetInfoDao;
 import com.example.adoption.service.ifs.PetAdoptionService;
+import com.example.adoption.service.ifs.PetInfoService;
 import com.example.adoption.vo.PetAdoptionResponse;
+import com.example.adoption.vo.PetInfoRequest;
+import com.example.adoption.vo.PetInfoResponse;
 
 
 @Service
@@ -24,6 +27,9 @@ public class PetAdoptionServiceImpl implements PetAdoptionService{
 	
 	@Autowired
 	private PetAdoptionDao petAdoptionDao;
+	
+	@Autowired
+	private PetInfoService petInfoService;
 	
 	
 	
@@ -111,6 +117,12 @@ public class PetAdoptionServiceImpl implements PetAdoptionService{
 		PetAdoption adoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterId(petId, ownerId, adopterId);
 		if(adoption.getOwnerConfirm() == 1 && adoption.getAdopterConfirm() == 1) {
 			petInfoDao.updateFinalAdopterIdAndAdoptionStatus(petId, adopterId, "已送養");
+			// save the new pet info to the adopter's pet list
+			PetInfo newPet = new PetInfo(adopterId, pet.getPetName(), pet.getPetBreed(), 
+					pet.getAdoptionStatus(), "正常", pet.,
+					boolean ligation, String type);
+			PetInfoRequest req = new PetInfoRequest(newPet);
+			PetInfoResponse res = petInfoService.createPet(req);
 		}
 		
 		return new PetAdoptionResponse(adoption, RtnCode.SUCCESSFUL);

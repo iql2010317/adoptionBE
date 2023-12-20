@@ -90,6 +90,21 @@ public class PetInfo {
 	}
 	
 	
+	// for adoption inherit
+	public PetInfo(int userId, String petName, String petBreed, String adoptionStatus, String age, String vaccine,
+			boolean ligation, String type) {
+		super();
+		this.userId = userId;
+		this.petName = petName;
+		this.petBreed = petBreed;
+		this.adoptionStatus = adoptionStatus;
+		this.age = age;
+		this.vaccine = vaccine;
+		this.ligation = ligation;
+		this.type = type;
+	}
+
+
 
 	public PetInfo(int userId, String petName, String petBreed, String petStatus, String adoptionStatus, String age,
 			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String location) {
