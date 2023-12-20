@@ -1,10 +1,7 @@
 package com.example.adoption.service.impl;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -291,33 +288,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 				existingUserInfo.setPermission(userInfo.getPermission());
 			}
 
-			String base64Photo = userInfo.getUserPhoto();
-
-			if (base64Photo != null && !base64Photo.isEmpty()) {
-				// 找到逗號的位置
-				int commaIndex = base64Photo.indexOf(',');
-				if (commaIndex != -1) {
-					// 截取逗號後的部分
-					String base64Image = base64Photo.substring(commaIndex + 1);
-
-					try {
-						byte[] decodedBytes = Base64.getDecoder().decode(base64Image);
-
-						String timestamp = String.valueOf(System.currentTimeMillis());
-						String imageName = "image_" + timestamp + ".jpg";
-						String imagePath = "C:/Users/iql20/OneDrive/桌面/htmlfile/2023-12-25/public/" + imageName;
-
-						FileOutputStream fileOutputStream = new FileOutputStream(imagePath);
-						fileOutputStream.write(decodedBytes);
-						fileOutputStream.close();
-
-						// 將檔案路徑設置到 userInfo 中
-						existingUserInfo.setUserPhoto(imagePath);
-					} catch (IOException e) {
-						// 處理例外
-						e.printStackTrace();
-					}
-				}
+			// 12.20 change userPhoto to BLOB
+			if (userInfo.getUserPhoto() != null) {
+				existingUserInfo.setUserPhoto(userInfo.getUserPhoto());
 			}
 
 			// 儲存更新後的資料
@@ -499,13 +472,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return "成功更新密碼，請重新登入";
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+>>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
 	@Override
 	public UserInfoResponse searchById(int userId) {
 		UserInfo userInfo = userInfoDao.findByUserId(userId);
 		return new UserInfoResponse(userInfo);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
 
 }
