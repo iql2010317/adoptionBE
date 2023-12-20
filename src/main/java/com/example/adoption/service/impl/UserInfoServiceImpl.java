@@ -1,7 +1,9 @@
 package com.example.adoption.service.impl;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -50,6 +52,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 			String[] emailParts = email.split("@");
 			userInfo.setAccount(emailParts[0]); // 使用 @ 之前的字串作為帳號
 		}
+
+		// age
+		LocalDate currentDate = LocalDate.now();
+		LocalDate birth = userInfo.getBirthday();
+		int age = Period.between(birth, currentDate).getYears();
+		userInfo.setAge(age);
 
 		// 12.14 permission for admin and user
 		if ("iql2010317@gmail.com".equals(userInfo.getEmail())) {
@@ -478,6 +486,5 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserInfo userInfo = userInfoDao.findByUserId(userId);
 		return new UserInfoResponse(userInfo);
 	}
-
 
 }
