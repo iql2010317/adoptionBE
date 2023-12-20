@@ -58,21 +58,12 @@ public class UserInfoController {
 			@RequestParam(value = "confirmPassword", required = false) String confirmPassword) {
 		return userInfoService.forceChangePassword(email, newPassword, confirmPassword);
 	}
-<<<<<<< HEAD
-=======
 
-
->>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
-	
-	//12.19 this one for search user
+	// 12.19 this one for search user
 	@GetMapping(value = "api/adoption/userInfo/finduser")
 	public UserInfoResponse searchById(//
 			@RequestParam(value = "userId", required = false) int userId) {
 		return userInfoService.searchById(userId);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
 
 }
