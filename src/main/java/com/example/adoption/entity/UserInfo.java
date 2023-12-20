@@ -25,21 +25,19 @@ public class UserInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "user_id")
-	private int userId; // PK1
+	private int userId;
 
 	@Column(name = "user_name")
 	private String userName;
 
-//	@Id
 	@Column(name = "account")
-	private String account; // PK2 //�Ȯɵ���
+	private String account;
 
 	@Column(name = "password")
 	private String password;
 
-//	@Id
 	@Column(name = "email")
-	private String email; /// �Ȯɵ���
+	private String email;
 
 	@Column(name = "phone")
 	private String phone;
@@ -68,8 +66,8 @@ public class UserInfo {
 	@Column(name = "sentence_to_adopter")
 	private String sentenceToAdopter;
 
-	@Column(name = "user_photo")
-	private String userPhoto;
+	@Column(name = "user_photo", columnDefinition = "MEDIUMBLOB")
+	private byte[] userPhoto;
 
 	@Column(name = "user_real_name")
 	private String userRealName;
@@ -95,7 +93,7 @@ public class UserInfo {
 
 	public UserInfo(int userId, String userName, String account, String password, String email, String phone,
 			String address, String profile, int age, LocalDate birthday, String gender, String jobOccupation,
-			String familyStatus, String sentenceToAdopter, String userPhoto, String userRealName, int permission,
+			String familyStatus, String sentenceToAdopter, byte[] userPhoto, String userRealName, int permission,
 			String registerRandomString, LocalDateTime randomStringTime, boolean hasOpened) {
 		super();
 		this.userId = userId;
@@ -232,11 +230,11 @@ public class UserInfo {
 		this.sentenceToAdopter = sentenceToAdopter;
 	}
 
-	public String getUserPhoto() {
+	public byte[] getUserPhoto() {
 		return userPhoto;
 	}
 
-	public void setUserPhoto(String userPhoto) {
+	public void setUserPhoto(byte[] userPhoto) {
 		this.userPhoto = userPhoto;
 	}
 
