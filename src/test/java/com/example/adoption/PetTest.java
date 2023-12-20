@@ -27,7 +27,7 @@ public class PetTest {
 //		adoptionStatus, age, vaccine, petProfile, 
 //		ligation, type, petPhoto, petOtherPhoto, locaiton
 		
-		PetInfo pet = new PetInfo(52, "小花", "三花貓", "健康", 
+		PetInfo pet = new PetInfo(46, "black", "三花貓", "健康", 
 				"送養中", "五個月", "狂犬病疫苗", null, 
 				false, "貓", null, null);
 		PetInfoRequest req = new PetInfoRequest(pet);
@@ -68,14 +68,14 @@ public class PetTest {
 	
 	@Test
 	public void adoptPetTest() {
-		PetInfoResponse res = petService.adoptPet("P5202", 52);
+		PetInfoResponse res = petService.adoptPet("P5202", 48);
 		System.out.println(res.getRtnCode().getMessage());
 	}
 	
 	
 	@Test
 	public void getAdoptPetListTest() {
-		int userId = 4;
+		int userId = 48;
 		PetInfoListResponse res = petService.getAdoptPetList(userId);
 		System.out.println(res.getRtnCode().getMessage());
 		System.out.println(res.getPetInfoList().size());
