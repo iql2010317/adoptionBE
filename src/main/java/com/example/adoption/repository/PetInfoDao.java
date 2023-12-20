@@ -47,7 +47,7 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 			@Param("petProfile")String petProfile, 
 			@Param("ligation")boolean ligation, 
 			@Param("type")String type, 
-			@Param("petPhoto")String petPhoto, 
+			@Param("petPhoto")byte[] petPhoto, 
 			@Param("location")String location);
 	
 	

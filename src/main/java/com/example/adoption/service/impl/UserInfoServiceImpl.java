@@ -472,13 +472,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return "成功更新密碼，請重新登入";
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+>>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
 	@Override
 	public UserInfoResponse searchById(int userId) {
 		UserInfo userInfo = userInfoDao.findByUserId(userId);
 		return new UserInfoResponse(userInfo);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc794125a405de22fdfa8a90b6cb6be3774300a6
 
 }

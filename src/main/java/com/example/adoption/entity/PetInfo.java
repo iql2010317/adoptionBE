@@ -12,13 +12,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
-
 @Entity
 @Table(name = "pet_info")
 public class PetInfo {
-	
-	
+
 	/* parameters */
 	@Id
 	@JsonProperty("pet_id")
@@ -31,7 +28,7 @@ public class PetInfo {
 
 	@JsonProperty("pet_name")
 	@Column(name = "pet_name")
-	private String petName; 
+	private String petName;
 
 	@JsonProperty("adopter_id_list")
 	@Column(name = "adopter_id_list")
@@ -39,7 +36,7 @@ public class PetInfo {
 
 	@JsonProperty("final_adopter_id")
 	@Column(name = "final_adopter_id")
-	private int finalAdopterId; 
+	private int finalAdopterId;
 
 	@JsonProperty("pet_breed")
 	@Column(name = "pet_breed")
@@ -73,14 +70,15 @@ public class PetInfo {
 	@Column(name = "type")
 	private String type;
 
+	// 12.20 change to BLOB
 	@JsonProperty("pet_photo")
-	@Column(name = "pet_photo")
-	private String petPhoto;
+	@Column(name = "pet_photo", columnDefinition = "MEDIUMBLOB")
+	private byte[] petPhoto;
 
 	@JsonProperty("pet_other_photo")
 	@Column(name = "pet_other_photo")
 	private String petOtherPhoto;
-	
+
 	@Column(name = "location")
 	private String location;
 
@@ -88,8 +86,7 @@ public class PetInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	// for adoption inherit
 	public PetInfo(int userId, String petName, String petBreed, String adoptionStatus, String age, String vaccine,
 			boolean ligation, String type) {
@@ -104,10 +101,8 @@ public class PetInfo {
 		this.type = type;
 	}
 
-
-
 	public PetInfo(int userId, String petName, String petBreed, String petStatus, String adoptionStatus, String age,
-			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String location) {
+			String vaccine, String petProfile, boolean ligation, String type, byte[] petPhoto, String location) {
 		super();
 		this.userId = userId;
 		this.petName = petName;
@@ -122,13 +117,10 @@ public class PetInfo {
 		this.petPhoto = petPhoto;
 		this.location = location;
 	}
-	
-	
-
 
 	public PetInfo(String petId, int userId, String petName, String petBreed, String petStatus, String adoptionStatus,
 			String adoptionConditions, String age, String vaccine, String petProfile, boolean ligation, String type,
-			String petPhoto, String petOtherPhoto, String location) {
+			byte[] petPhoto, String petOtherPhoto, String location) {
 		super();
 		this.petId = petId;
 		this.userId = userId;
@@ -146,8 +138,6 @@ public class PetInfo {
 		this.petOtherPhoto = petOtherPhoto;
 		this.location = location;
 	}
-
-
 
 	/* getter&setter */
 	public String getPetId() {
@@ -262,11 +252,11 @@ public class PetInfo {
 		this.type = type;
 	}
 
-	public String getPetPhoto() {
+	public byte[] getPetPhoto() {
 		return petPhoto;
 	}
 
-	public void setPetPhoto(String petPhoto) {
+	public void setPetPhoto(byte[] petPhoto) {
 		this.petPhoto = petPhoto;
 	}
 
@@ -285,6 +275,5 @@ public class PetInfo {
 	public void setLocaiton(String location) {
 		this.location = location;
 	}
-	
-	
+
 }
