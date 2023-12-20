@@ -35,21 +35,17 @@ class AdoptionApplicationTests {
 	// 嚙編嚙磕嚙瘡嚙踝蕭嚙踝蕭嚙�
 	@Test
 	void userInfoCreateTest() {
-//		UserInfo userInfo = new UserInfo();
-//		userInfo.setAccount("iql2010317");
-//		userInfo.setPassword("123");
-//		userInfo.setPhone("0977456874");
-//		userInfo.setEmail("iql2010317@gmail.com");
-//		LocalDate birth = LocalDate.parse("1995-03-13");
-//////		userInfo.setAccount("haha");
-////		userInfo.setPassword("123");
-////		userInfo.setEmail("test99");
-////		userInfo.setBirthday(birth);
-//
-//		UserInfoRequest req = new UserInfoRequest(userInfo);
-//		userInfoService.create(req);
-		String currentDir = System.getProperty("user.dir");
-		System.out.println("當前工作目錄：" + currentDir);
+		UserInfo userInfo = new UserInfo();
+		LocalDate birth = LocalDate.parse("1995-03-13");
+
+		userInfo.setUserName("玉翔");
+		userInfo.setPassword("Az123456");
+		userInfo.setEmail("iql2010317@gmail.com");
+		userInfo.setBirthday(birth);
+
+		UserInfoRequest req = new UserInfoRequest(userInfo);
+		userInfoService.create(req);
+
 	}
 
 	@Test
