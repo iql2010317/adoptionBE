@@ -136,15 +136,16 @@ public class PetInfoServiceImpl implements PetInfoService{
 			petDao.updateInfo(
 					pet.getPetId(), pet.getPetName(), pet.getPetBreed(), pet.getPetStatus(), 
 					pet.getAdoptionStatus(), pet.getAge(), pet.getVaccine(), pet.getPetProfile(), 
-					pet.isLigation(), pet.getType(), pet.getPetPhoto(), pet.getLocaiton()
+					pet.isLigation(), pet.getType(), pet.getPetPhoto(), pet.getLocation()
 					);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new PetInfoResponse(null, RtnCode.SAVE_DB_ERROR);
 		}
 		
+		System.out.println(pet);
 		
-		return new PetInfoResponse(null, RtnCode.SUCCESSFUL);
+		return new PetInfoResponse(pet, RtnCode.SUCCESSFUL);
 	}
 
 

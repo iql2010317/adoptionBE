@@ -75,7 +75,7 @@ public class PetInfo {
 
 	@JsonProperty("pet_photo")
 	@Column(name = "pet_photo")
-	private String petPhoto;
+	private byte[] petPhoto;
 
 	@JsonProperty("pet_other_photo")
 	@Column(name = "pet_other_photo")
@@ -107,7 +107,7 @@ public class PetInfo {
 
 
 	public PetInfo(int userId, String petName, String petBreed, String petStatus, String adoptionStatus, String age,
-			String vaccine, String petProfile, boolean ligation, String type, String petPhoto, String location) {
+			String vaccine, String petProfile, boolean ligation, String type, byte[] petPhoto, String location) {
 		super();
 		this.userId = userId;
 		this.petName = petName;
@@ -128,7 +128,7 @@ public class PetInfo {
 
 	public PetInfo(String petId, int userId, String petName, String petBreed, String petStatus, String adoptionStatus,
 			String adoptionConditions, String age, String vaccine, String petProfile, boolean ligation, String type,
-			String petPhoto, String petOtherPhoto, String location) {
+			byte[] petPhoto, String petOtherPhoto, String location) {
 		super();
 		this.petId = petId;
 		this.userId = userId;
@@ -262,11 +262,11 @@ public class PetInfo {
 		this.type = type;
 	}
 
-	public String getPetPhoto() {
+	public byte[] getPetPhoto() {
 		return petPhoto;
 	}
 
-	public void setPetPhoto(String petPhoto) {
+	public void setPetPhoto(byte[] petPhoto) {
 		this.petPhoto = petPhoto;
 	}
 
@@ -278,11 +278,11 @@ public class PetInfo {
 		this.petOtherPhoto = petOtherPhoto;
 	}
 
-	public String getLocaiton() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocaiton(String location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	
