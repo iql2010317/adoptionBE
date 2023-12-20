@@ -117,15 +117,19 @@ public class PetInfoServiceImpl implements PetInfoService {
 		// save to DB
 		// use try/catch
 		try {
-			petDao.updateInfo(pet.getPetId(), pet.getPetName(), pet.getPetBreed(), pet.getPetStatus(),
-					pet.getAdoptionStatus(), pet.getAge(), pet.getVaccine(), pet.getPetProfile(), pet.isLigation(),
-					pet.getType(), pet.getPetPhoto(), pet.getLocaiton());
+			petDao.updateInfo(
+					pet.getPetId(), pet.getPetName(), pet.getPetBreed(), pet.getPetStatus(), 
+					pet.getAdoptionStatus(), pet.getAge(), pet.getVaccine(), pet.getPetProfile(), 
+					pet.isLigation(), pet.getType(), pet.getPetPhoto(), pet.getLocation()
+					);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new PetInfoResponse(null, RtnCode.SAVE_DB_ERROR);
 		}
-
-		return new PetInfoResponse(null, RtnCode.SUCCESSFUL);
+		
+		System.out.println(pet);
+		
+		return new PetInfoResponse(pet, RtnCode.SUCCESSFUL);
 	}
 
 	// delete
@@ -265,6 +269,24 @@ public class PetInfoServiceImpl implements PetInfoService {
 		}
 
 		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public PetInfoResponse quitAdoptPet(String petId, int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetInfoResponse rejectAdoptPet(String petId, int ownerId, int adopterId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetInfoAndUserInfoResponse getAdoptPetInfoAndUserInfo(String petId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

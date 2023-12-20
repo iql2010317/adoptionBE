@@ -108,8 +108,8 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 			petInfoDao.updateFinalAdopterIdAndAdoptionStatus(petId, adopterId, "已送養");
 			// save the new pet info to the adopter's pet list
 			PetInfo newPet = new PetInfo(adopterId, pet.getPetName(), pet.getPetBreed(), 
-					pet.getAdoptionStatus(), "正常", pet.,
-					boolean ligation, String type);
+					pet.getAdoptionStatus(), "正常", pet.getVaccine(),
+					pet.isLigation(), pet.getType());
 			PetInfoRequest req = new PetInfoRequest(newPet);
 			PetInfoResponse res = petInfoService.createPet(req);
 		}

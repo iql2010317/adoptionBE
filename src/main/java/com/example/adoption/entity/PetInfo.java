@@ -268,11 +268,11 @@ public class PetInfo {
 		this.petOtherPhoto = petOtherPhoto;
 	}
 
-	public String getLocaiton() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocaiton(String location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 
