@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.adoption.entity.PetInfo;
+import com.example.adoption.entity.UserInfo;
 
 
 @Repository
@@ -59,5 +60,8 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	public List<PetInfo> findAllByAdoptionStatus(String adoptionStatus);
 	
 	
+	@Query(value = "SELECT * FROM pet_info p WHERE p.pet_id = :petId", nativeQuery = true)
+	public PetInfo selectByPetId(@Param("petId")String petId);
+
 	
 }

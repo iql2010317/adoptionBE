@@ -29,9 +29,13 @@ public class Notification {
 	
 	//送領養寵物的ID
 	@Column(name = "pet_id")
-	private int petId;
+	private String petId;
 	
 	//傳送的訊息
+	@Column(name = "notifi_contain")
+	private String notifiContain;
+	
+	//提示訊息
 	@Column(name = "msg")
 	private String msg;
 	
@@ -43,28 +47,39 @@ public class Notification {
 	@Column(name = "date_time")
 	private LocalDateTime dateTime;
 
+	@Column(name = "notifi_type")
+	private int notifiType;
+	
+	
+
 	public Notification() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notification(int userId, int sendId, int petId, String msg, boolean isRead, LocalDateTime dateTime) {
+
+
+	public Notification(int userId, int sendId, String petId, String notifiContain, String msg, boolean isRead,
+			LocalDateTime dateTime,int notifiType) {
 		super();
 		this.userId = userId;
 		this.sendId = sendId;
 		this.petId = petId;
+		this.notifiContain = notifiContain;
 		this.msg = msg;
 		this.isRead = isRead;
 		this.dateTime = dateTime;
+		this.notifiType = notifiType;
 	}
 
-	
-	
-	public Notification(int userId, int sendId, int petId) {
+
+
+	public Notification(int userId, int sendId, String petId,int notifiType) {
 		super();
 		this.userId = userId;
 		this.sendId = sendId;
 		this.petId = petId;
+		this.notifiType = notifiType;
 	}
 
 	public int getId() {
@@ -91,11 +106,11 @@ public class Notification {
 		this.sendId = sendId;
 	}
 
-	public int getPetId() {
+	public String getPetId() {
 		return petId;
 	}
 
-	public void setPetId(int petId) {
+	public void setPetId(String petId) {
 		this.petId = petId;
 	}
 
@@ -122,7 +137,30 @@ public class Notification {
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
-	
+
+
+
+	public String getNotifiContain() {
+		return notifiContain;
+	}
+
+
+	public void setNotifiContain(String notifiContain) {
+		this.notifiContain = notifiContain;
+	}
+
+
+
+	public int getNotifiType() {
+		return notifiType;
+	}
+
+
+
+	public void setNotifiType(int notifiType) {
+		this.notifiType = notifiType;
+	}
+
 	
 
 }

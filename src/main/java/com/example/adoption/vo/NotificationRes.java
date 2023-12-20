@@ -37,6 +37,6 @@ public class NotificationRes {
 	public void setRtnCode(RtnCode rtnCode) {
 		this.rtnCode = rtnCode;
 	}
-	
+
 	
 }
