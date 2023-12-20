@@ -10,9 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.adoption.entity.NewInfo;
 import com.example.adoption.entity.UserInfo;
 import com.example.adoption.repository.UserInfoDao;
+import com.example.adoption.service.ifs.NewInfoService;
 import com.example.adoption.service.ifs.UserInfoService;
+import com.example.adoption.vo.NewInfoRequest;
+import com.example.adoption.vo.NewInfoResponse;
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -25,22 +29,27 @@ class AdoptionApplicationTests {
 	@Autowired
 	private UserInfoDao userInfoDao;
 
+	@Autowired
+	private NewInfoService newInfoService;
+
 	// 嚙編嚙磕嚙瘡嚙踝蕭嚙踝蕭嚙�
 	@Test
 	void userInfoCreateTest() {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setAccount("iql2010317");
-		userInfo.setPassword("123");
-		userInfo.setPhone("0977456874");
-		userInfo.setEmail("iql2010317@gmail.com");
-		LocalDate birth = LocalDate.parse("1995-03-13");
-////		userInfo.setAccount("haha");
+//		UserInfo userInfo = new UserInfo();
+//		userInfo.setAccount("iql2010317");
 //		userInfo.setPassword("123");
-//		userInfo.setEmail("test99");
-//		userInfo.setBirthday(birth);
-
-		UserInfoRequest req = new UserInfoRequest(userInfo);
-		userInfoService.create(req);
+//		userInfo.setPhone("0977456874");
+//		userInfo.setEmail("iql2010317@gmail.com");
+//		LocalDate birth = LocalDate.parse("1995-03-13");
+//////		userInfo.setAccount("haha");
+////		userInfo.setPassword("123");
+////		userInfo.setEmail("test99");
+////		userInfo.setBirthday(birth);
+//
+//		UserInfoRequest req = new UserInfoRequest(userInfo);
+//		userInfoService.create(req);
+		String currentDir = System.getProperty("user.dir");
+		System.out.println("當前工作目錄：" + currentDir);
 	}
 
 	@Test
@@ -114,6 +123,32 @@ class AdoptionApplicationTests {
 		UserInfoResponse res = userInfoService.searchById(53);
 		UserInfo user = res.getUserInfo();
 		System.out.println(user.getAccount());
+	}
+
+	@Test
+	void newInfoTest() {
+		LocalDate date = LocalDate.parse("2023-03-15");
+		NewInfo newInfo = new NewInfo();
+		newInfo.setTitle("【巴克預備學校 體驗營】即刻報名！");
+		newInfo.setContent("巴克預備學校 小小訓犬師體驗營\r\n" + "<點此報名>\r\n" + "\r\n" + "\r\n" + "想要幫助浪浪嗎？\r\n" + "\r\n"
+				+ "讓我們陪伴孩子，成為「小小訓練師」，學習浪浪相關知識，協助他們找到最適合的家人吧！\r\n"
+				+ "參與巴克幫獨創的送養系統-「巴克預備學校」的四步驟過程，讓小朋友知道狗狗也需要學習，經過社會化之後，可以更快融入家庭生活；同時了解台灣流浪狗的處境，學習正確跟狗狗相處方式。\r\n" + "\r\n"
+				+ "和巴克幫一起，讓浪浪們知道：「沒關係，有我在」。");
+		newInfo.setDate(date);
+		newInfo.setCategory("活動");
+		NewInfoRequest req = new NewInfoRequest(newInfo);
+		newInfoService.create(req);
+	}
+
+	@Test
+	void NewsearchTest() {
+		NewInfoResponse res = newInfoService.search();
+		List<NewInfo> newInfoList = res.getNewInfoList();
+		for (NewInfo newInfo : newInfoList) {
+			System.out.println(newInfo.getTitle());
+			System.out.println(newInfo.getDate());
+			System.out.println("=========");
+		}
 	}
 
 }
