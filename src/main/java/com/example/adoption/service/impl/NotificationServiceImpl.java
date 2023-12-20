@@ -214,6 +214,18 @@ public class NotificationServiceImpl implements NotificationService {
 		List<Notification> notifiList = notiDao.selectNotificationByUserId(userId);
 		return new NotificationRes(notifiList, RtnCode.SUCCESSFUL);
 	}
+
+
+	@Override
+	public NotificationRes setNotiRead(int userId) {
+		List<Notification> notifiList = notiDao.selectNotificationByUserId(userId);
+		for(Notification noti:notifiList) {
+			noti.setRead(true);
+		}
+		notiDao.saveAll(notifiList);
+		
+		return new NotificationRes(null, RtnCode.SUCCESSFUL);
+	}
 	
 	
 

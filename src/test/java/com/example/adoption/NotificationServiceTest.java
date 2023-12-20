@@ -34,6 +34,12 @@ public class NotificationServiceTest {
 		}
 		
 	}
+
+	@Test
+	public void setNotiReadTest() {
+
+		service.setNotiRead(54);
+	}
 	
 
 }
