@@ -1,5 +1,7 @@
 package com.example.adoption.service.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,8 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public ArticleRes create(ArticleReq req) {
 		Article article = req.getArticle();
+		article.setPostTime(LocalDateTime.now());
 		Article saveArticle = articleDao.save(article);
 		return new ArticleRes(saveArticle);
 	}
-
-	
 }
