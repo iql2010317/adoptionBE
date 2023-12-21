@@ -16,7 +16,7 @@ public class NewInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "serial_no")
-	private int serialNo;
+	private Integer serialNo;
 
 	@Column(name = "title")
 	private String title;
@@ -33,26 +33,11 @@ public class NewInfo {
 	@Column(name = "image", columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
 
-	public NewInfo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public NewInfo(int serialNo, String title, String content, LocalDate date, String category, byte[] image) {
-		super();
-		this.serialNo = serialNo;
-		this.title = title;
-		this.content = content;
-		this.date = date;
-		this.category = category;
-		this.image = image;
-	}
-
-	public int getSerialNo() {
+	public Integer getSerialNo() {
 		return serialNo;
 	}
 
-	public void setSerialNo(int serialNo) {
+	public void setSerialNo(Integer serialNo) {
 		this.serialNo = serialNo;
 	}
 
@@ -95,5 +80,31 @@ public class NewInfo {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	public NewInfo(Integer serialNo, String title, String content, LocalDate date, String category, byte[] image) {
+		super();
+		this.serialNo = serialNo;
+		this.title = title;
+		this.content = content;
+		this.date = date;
+		this.category = category;
+		this.image = image;
+	}
+
+	public NewInfo(String title, String content, LocalDate date, String category, byte[] image) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.date = date;
+		this.category = category;
+		this.image = image;
+	}
+
+	public NewInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 }
