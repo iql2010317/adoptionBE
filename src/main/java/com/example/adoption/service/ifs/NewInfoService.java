@@ -8,5 +8,9 @@ public interface NewInfoService {
 	public NewInfoResponse create(NewInfoRequest req);
 	
 	public NewInfoResponse search();
+	
+//	public NewInfoResponse delete();
+//	
+//	public NewInfoResponse update();
 
 }
