@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `notifi_type` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
