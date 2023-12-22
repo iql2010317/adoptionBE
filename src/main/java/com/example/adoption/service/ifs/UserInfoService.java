@@ -7,6 +7,8 @@ public interface UserInfoService {
 
 	// sg
 	public UserInfoResponse create(UserInfoRequest req);
+	
+	public UserInfoResponse createFakeUser(UserInfoRequest req);
 
 	// ���U�޿� +�[�J���{�ҽX
 	public UserInfoResponse compareAuthenticationCode(UserInfoRequest req);

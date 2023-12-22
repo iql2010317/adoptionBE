@@ -487,4 +487,35 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return new UserInfoResponse(userInfo);
 	}
 
+	@Override
+	public UserInfoResponse createFakeUser(UserInfoRequest req) {
+		UserInfo userInfo = req.getUserInfo();
+
+		// 處理 密碼加密邏輯
+		// 如果user的密碼不為空 則加密
+		if (userInfo.getPassword() != null && !userInfo.getPassword().isEmpty()) {
+			String encryptedPassword = encoder.encode(userInfo.getPassword());
+			userInfo.setPassword(encryptedPassword); // 將加密後的密碼設定回UserInfo物件中
+		}
+
+		///// 處理account邏輯 如果使用者沒有設定account 則利用mail@前的字串當成account
+		if (userInfo.getAccount() == null || userInfo.getAccount().isEmpty()) {
+			String email = userInfo.getEmail();
+			String[] emailParts = email.split("@");
+			userInfo.setAccount(emailParts[0]); // 使用 @ 之前的字串作為帳號
+		}
+
+		userInfo.setHasOpened(true);
+		userInfo.setPermission(5);
+
+		// age
+		LocalDate currentDate = LocalDate.now();
+		LocalDate birth = userInfo.getBirthday();
+		int age = Period.between(birth, currentDate).getYears();
+		userInfo.setAge(age);
+
+		UserInfo saveduserInfo = userInfoDao.save(userInfo);
+		return new UserInfoResponse(saveduserInfo);
+	}
+
 }

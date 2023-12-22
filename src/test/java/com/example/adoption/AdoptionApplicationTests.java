@@ -49,6 +49,20 @@ class AdoptionApplicationTests {
 	}
 
 	@Test
+	void createFakeUserTest() {
+		UserInfo userInfo = new UserInfo();
+		LocalDate birth = LocalDate.parse("1978-05-15");
+
+		userInfo.setUserName("早餐店阿姨");
+		userInfo.setPassword("Az123456");
+		userInfo.setEmail("test01@gmail.com");
+		userInfo.setBirthday(birth);
+
+		UserInfoRequest req = new UserInfoRequest(userInfo);
+		userInfoService.createFakeUser(req);
+	}
+
+	@Test
 	void userInfoUpdateTest() {
 		// 嚙踝蕭嚙踝蕭嚙緩嚙編嚙箭嚙踝蕭嚙複庫嚙踝蕭嚙踝蕭 UserInfo
 		int userIdToUpdate = 13; // 嚙踝蕭嚙稽嚙豎要嚙踝蕭s嚙踝蕭嚙諄歹蕭ID嚙踝蕭1

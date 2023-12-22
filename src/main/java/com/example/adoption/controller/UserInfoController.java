@@ -24,6 +24,11 @@ public class UserInfoController {
 		return userInfoService.create(req);
 	}
 
+	@PostMapping(value = "api/adoption/userInfo/createFakeUser")
+	public UserInfoResponse createFakeUser(@RequestBody UserInfoRequest req) {
+		return userInfoService.createFakeUser(req);
+	}
+
 	@PostMapping(value = "api/adoption/userInfo/compare")
 	public UserInfoResponse compareAuthenticationCode(@RequestBody UserInfoRequest req) {
 		return userInfoService.compareAuthenticationCode(req);
@@ -58,13 +63,12 @@ public class UserInfoController {
 			@RequestParam(value = "confirmPassword", required = false) String confirmPassword) {
 		return userInfoService.forceChangePassword(email, newPassword, confirmPassword);
 	}
-	
-	//12.19 this one for search user
+
+	// 12.19 this one for search user
 	@GetMapping(value = "api/adoption/userInfo/finduser")
 	public UserInfoResponse searchById(//
 			@RequestParam(value = "userId", required = false) int userId) {
 		return userInfoService.searchById(userId);
 	}
-
 
 }
