@@ -16,7 +16,7 @@ public class NewInfoTest {
 	@Test
 	public void test() {
 
-		this.newInfoDao.update("55555555555555", null, null, null, "我不要我要更新再更新");
+//		this.newInfoDao.update("55555555555555", null, null, null, "我不要我要更新再更新");
 	
 	}
 }

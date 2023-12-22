@@ -1,36 +1,24 @@
-package com.example.adoption.entity;
+package com.example.adoption.vo;
 
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "new_info")
-public class NewInfo {
+public class InfoReq {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "serial_no")
 	private int serialNo;
 
-	@Column(name = "title")
 	private String title;
 
-	@Column(name = "content")
 	private String content;
 
-	@Column(name = "date")
 	private LocalDate date;
 
-	@Column(name = "category")
 	private String category;
 
-	@Column(name = "image", columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
 
 	public int getSerialNo() {
@@ -80,31 +68,7 @@ public class NewInfo {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
-	public NewInfo(int serialNo, String title, String content, LocalDate date, String category, byte[] image) {
-		super();
-		this.serialNo = serialNo;
-		this.title = title;
-		this.content = content;
-		this.date = date;
-		this.category = category;
-		this.image = image;
-	}
-
-	public NewInfo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public NewInfo(String title, String content, LocalDate date, String category, byte[] image) {
-		super();
-		this.title = title;
-		this.content = content;
-		this.date = date;
-		this.category = category;
-		this.image = image;
-	}
-
-
+	
+	
 
 }
