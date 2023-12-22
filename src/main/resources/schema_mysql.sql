@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS `notification` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
 CREATE TABLE IF NOT EXISTS `user_info` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT NULL,
@@ -81,6 +80,3 @@ CREATE TABLE IF NOT EXISTS `map_search` (
   `img` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`serial_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-
