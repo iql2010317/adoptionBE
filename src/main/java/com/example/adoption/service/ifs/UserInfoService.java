@@ -7,38 +7,36 @@ import com.example.adoption.vo.UserInfoResponse;
 
 public interface UserInfoService {
 
-	// sg
+	// 人員註冊
 	public UserInfoResponse create(UserInfoRequest req);
-	
-	public UserInfoResponse createFakeUser(UserInfoRequest req);
 
-	// ���U�޿� +�[�J���{�ҽX
+	// 比對驗證碼邏輯
 	public UserInfoResponse compareAuthenticationCode(UserInfoRequest req);
 
-	// ����H���C��j�M (for admin
+	// 尋找人員資料
 	public UserInfoResponse search();
-	
+
 	// for pet search user
 	public UserInfoResponse searchById(int userId);
 	
 	// for pet info check the adopters
 	public UserInfoResponse getAdoptersInfo(String idList);
 
-	// �n�J�޿� (for user or admin
+	// 用戶註冊
 	public String userLogin(String email, String password);
 
-	// ��s�޿� (for user or admin
+	// 用戶資料更新
 	public UserInfoResponse update(UserInfoRequest req);
 
-	// �Τ� �ѰO�K�X
+	// 用戶忘記密碼
 	public String userFogetPassword(String email);
 
-	// ���U�Τ� �o�e�{�ҽX
+	// 發送認證信
 	public String sendAuthenticationCode(String email);
 
-	// �w���U�Τ� �ѰO�K�X 
-	//�ϥ�6���H���X�n�J�� �j����K�X
+	// 強制修改密碼
 	public String forceChangePassword(String email, String newPassword, String confirmPassword);
-	
+
+	public UserInfoResponse createFakeUser(UserInfoRequest req);
 
 }

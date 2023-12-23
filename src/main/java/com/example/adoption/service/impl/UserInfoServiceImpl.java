@@ -56,7 +56,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userInfo.setAccount(emailParts[0]); // 使用 @ 之前的字串作為帳號
 		}
 
-		// age
+		// 年齡處理
 		LocalDate currentDate = LocalDate.now();
 		LocalDate birth = userInfo.getBirthday();
 		int age = Period.between(birth, currentDate).getYears();
@@ -130,27 +130,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		UserInfo userInfo = userInfoDao.findByEmail(req.getUserInfo().getEmail());
 
-//  // 處理 密碼加密邏輯
-//  // 如果user的密碼不為空 則加密
-//  if (userInfo.getPassword() != null && !userInfo.getPassword().isEmpty()) {
-//   String encryptedPassword = encoder.encode(userInfo.getPassword());
-//   userInfo.setPassword(encryptedPassword); // 將加密後的密碼設定回UserInfo物件中
-//  }
-
-//  ///// 處理account邏輯 如果使用者沒有設定account 則利用mail@前的字串當成account
-//  if (userInfo.getAccount() == null || userInfo.getAccount().isEmpty()) {
-//   String email = userInfo.getEmail();
-//   String[] emailParts = email.split("@");
-//   userInfo.setAccount(emailParts[0]); // 使用 @ 之前的字串作為帳號
-//  }
-
-//  // 12.14 permission for admin and user
-//  if (userInfo.getEmail() == "iql2010317@gmail.com") {
-//   userInfo.setPermission(20); // for admin
-//  } else {
-//   userInfo.setPermission(5); // forn user
-//  }
-
 		// 取得用戶傳來的 Email 和驗證碼
 		String email = userInfo.getEmail();
 		String authenticationCode = userInfo.getRegisterRandomString();
@@ -205,6 +184,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 				Duration duration = Duration.between(randomStringTime, currentTime);
 				long minutesPassed = duration.toMinutes();
 
+				//設定認證時間
 				if (minutesPassed <= 30 && password.equals(userInfo.getRegisterRandomString())) {
 					// 登入成功並開通帳號
 					userInfo.setHasOpened(true);
@@ -236,19 +216,22 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public UserInfoResponse update(UserInfoRequest req) {
+		
+		//從UserInfoRequest 來的 userInfo
 		UserInfo userInfo = req.getUserInfo();
-
+		
 		Optional<UserInfo> existingUserInfoOptional = userInfoDao.findById(userInfo.getUserId());
 
 		if (existingUserInfoOptional.isPresent()) {
+			
+			//透過findById 得到的existingUserInfo
 			UserInfo existingUserInfo = existingUserInfoOptional.get();
 
-			////
+			//若更新資訊不為空 則讓userInfo set為 existingUserInfo 
 			if (userInfo.getUserName() != null) {
 				existingUserInfo.setUserName(userInfo.getUserName());
 			}
 
-			///
 			if (userInfo.getAccount() != null) {
 				existingUserInfo.setAccount(userInfo.getAccount());
 			}
@@ -278,7 +261,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 				existingUserInfo.setJobOccupation(userInfo.getJobOccupation());
 			}
 
-			///
 			if (userInfo.getPhone() != null) {
 				existingUserInfo.setPhone(userInfo.getPhone());
 			}
@@ -294,12 +276,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 				existingUserInfo.setUserRealName(userInfo.getUserRealName());
 			}
 
-			// 12.14 new
 			if (userInfo.getPermission() > 0) {
 				existingUserInfo.setPermission(userInfo.getPermission());
 			}
 
-			// 12.20 change userPhoto to BLOB
 			if (userInfo.getUserPhoto() != null) {
 				existingUserInfo.setUserPhoto(userInfo.getUserPhoto());
 			}
@@ -308,8 +288,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			UserInfo savedUserInfo = userInfoDao.save(existingUserInfo);
 			return new UserInfoResponse(savedUserInfo);
 		} else {
-			// 找不到要更新的資料
-			return new UserInfoResponse(); // 或者適當的錯誤處理
+			
+			return new UserInfoResponse(); 
 		}
 	}
 
@@ -342,7 +322,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		//// 寄送信件邏輯
 		// 寄送信件邏輯
 		String recipientEmail = userInfo.getEmail();
-		String randomString = userInfo.getRegisterRandomString(); // 從 UserInfo 中取得隨機
+		String randomString = userInfo.getRegisterRandomString(); // 從 UserInfo 中取得隨機認證碼
 
 		// 設定SMTP
 		Properties props = new Properties();
@@ -369,10 +349,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// 設定收件人
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 
-			// 設定信件主題
+			// 設定信件主題 
 			message.setSubject("寵物會員認證碼");
 
-			// 設定信件內容
+			// 設定信件內容 //信件內容 for userFogetPassword
 			message.setText("使用此代碼作為臨時登入密碼" + randomString);
 
 			// 發送信件
