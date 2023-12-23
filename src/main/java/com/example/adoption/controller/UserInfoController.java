@@ -34,7 +34,7 @@ public class UserInfoController {
 		return userInfoService.compareAuthenticationCode(req);
 	}
 
-	// ��s�޿�
+	//更新
 	@PostMapping(value = "api/adoption/userInfo/updateUserInfo")
 	public UserInfoResponse update(@RequestBody UserInfoRequest req) {
 		return userInfoService.update(req);
