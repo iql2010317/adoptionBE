@@ -1,5 +1,7 @@
 package com.example.adoption.service.ifs;
 
+import java.util.List;
+
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -18,6 +20,9 @@ public interface UserInfoService {
 	
 	// for pet search user
 	public UserInfoResponse searchById(int userId);
+	
+	// for pet info check the adopters
+	public UserInfoResponse getAdoptersInfo(String idList);
 
 	// �n�J�޿� (for user or admin
 	public String userLogin(String email, String password);

@@ -1,5 +1,7 @@
 package com.example.adoption.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +25,7 @@ public interface UserInfoDao extends JpaRepository<UserInfo, Integer> {
 	public UserInfo selectByUserId(@Param("userId")int userId);
 
 	UserInfo findByUserId(int userId);
+	
+	List<UserInfo> findAllByUserIdIn(List<Integer> idList);
 
 }

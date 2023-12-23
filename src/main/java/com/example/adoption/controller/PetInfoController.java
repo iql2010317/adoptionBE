@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.adoption.service.ifs.PetAdoptionService;
 import com.example.adoption.service.ifs.PetInfoService;
+import com.example.adoption.vo.PetAdoptionRequest;
+import com.example.adoption.vo.PetAdoptionResponse;
+import com.example.adoption.vo.PetIdAndOwnerIdAndAdopterIdVo;
 import com.example.adoption.vo.PetIdAndUserIdVo;
 import com.example.adoption.vo.PetInfoAndUserInfoResponse;
 import com.example.adoption.vo.PetInfoListResponse;
@@ -82,6 +86,45 @@ public class PetInfoController {
 	public PetInfoListResponse getAdoptablePetList(@RequestParam(value = "type") String type,@RequestParam(value = "location") String location) {
 		return petInfoService.getAdoptablePetList(type, location);
 	}
+	
+	
+	
+	// ===================================
+	// adoption application
+	
+	
+	// adopter quit
+	@PostMapping(value = "api/adoption/petInfo/quitAdoptPet")
+	public PetInfoResponse quitAdoptPet(@RequestBody PetIdAndUserIdVo vo) {
+		return petInfoService.quitAdoptPet(vo.getPetId(), vo.getUserId());
+	}
+	
+	
+	
+	// owner reject
+	@PostMapping(value = "api/adoption/petInfo/rejectAdoptPet")
+	public PetInfoResponse rejectAdoptPet(@RequestBody PetIdAndOwnerIdAndAdopterIdVo vo) {
+		return petInfoService.rejectAdoptPet(vo.getPetId(), vo.getOwnerId(), vo.getAdopterId());
+	}
+	
+	
+	@Autowired
+	private PetAdoptionService petAdoptionService;
+	
+	
+	// owner confirm the apply of adoption
+	@PostMapping(value = "api/adoption/petInfo/ownerConfirm")
+	public PetAdoptionResponse ownerConfirm(@RequestBody PetAdoptionRequest req) {
+		return petAdoptionService.ownerConfirm(req.getPetId(), req.getOwnerId(), req.getAdopterId());
+	}
+	
+	
+	// adopter confirm the apply of adoption
+	@PostMapping(value = "api/adoption/petInfo/adopterConfirm")
+	public PetAdoptionResponse adopterConfirm(@RequestBody PetAdoptionRequest req) {
+		return petAdoptionService.adopterConfirm(req.getPetId(), req.getOwnerId(), req.getAdopterId(), req.getAdopterRes());
+	}
+
 	
 	
 }

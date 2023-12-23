@@ -22,7 +22,7 @@ public interface PetInfoService {
 	
 	
 	//==========================
-	// impl 171
+	// impl line 171
 	
 	
 	// add the user to adopter id list
@@ -36,7 +36,7 @@ public interface PetInfoService {
 	
 	
 	//==========================
-	//尚未寫進controller
+	// impl line 279
 	
 	
 	// adopter quit

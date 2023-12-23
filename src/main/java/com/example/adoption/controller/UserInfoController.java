@@ -1,5 +1,7 @@
 package com.example.adoption.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +71,12 @@ public class UserInfoController {
 	public UserInfoResponse searchById(//
 			@RequestParam(value = "userId", required = false) int userId) {
 		return userInfoService.searchById(userId);
+	}
+	
+	// for My_Adopt detail
+	@GetMapping(value = "api/adoption/userInfo/findAdopters")
+	public UserInfoResponse getAdoptersInfo(@RequestParam(value="idList") String idList) {
+		return userInfoService.getAdoptersInfo(idList);
 	}
 
 }

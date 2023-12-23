@@ -190,28 +190,31 @@ public class PetInfoServiceImpl implements PetInfoService {
 		// set the user id to the adopter id list
 		String strUserId = Integer.toString(userId);
 		
-		// 1. 将逗号分隔的字符串拆分为数组
+		
         String strAdopterIdList = pet.getAdopterIdList();
         if(!StringUtils.hasText(strAdopterIdList)) {
         	pet.setAdopterIdList(strUserId);
         } else {
+        	// 1. 將用逗號分隔開的字串轉成陣列
 	        String[] strArray = strAdopterIdList.split(",");
-	
-	        // 2. 将要添加的值追加到数组
-	        String[] newArray = Arrays.copyOf(strArray, strArray.length + 1);
-	        newArray[newArray.length - 1] = strUserId;
-	
-	        // 3. 如果需要，将数组转换回字符串
-	        String newStr = String.join(",", newArray);
-	
-	        // 打印结果
-	        System.out.println("Original String: " + strAdopterIdList);
-	        System.out.println("Original Array: " + Arrays.toString(strArray));
-	        System.out.println("Value to Add: " + strUserId);
-	        System.out.println("New Array: " + Arrays.toString(newArray));
-	        System.out.println("New String: " + newStr);
 	        
-	        pet.setAdopterIdList(newStr);
+	        // 2. 檢查陣列中是否包含該user id
+	        if (Arrays.asList(strArray).contains(strUserId)) {
+	        	// 如果有包含，返回訊息
+	        	return new PetInfoResponse(pet, RtnCode.THE_USER_HAS_ALREADY_ADOPTED_THE_PET);
+	        } else {
+	        	// 如果沒有包含，新增到陣中
+	            String[] newArray = Arrays.copyOf(strArray, strArray.length + 1);
+	            newArray[newArray.length - 1] = strUserId;
+
+	            // 將陣列轉回字串
+	            String newStr = String.join(",", newArray);
+	            
+	            // 存回pet
+	            pet.setAdopterIdList(newStr);
+	            
+	        }
+	        
         }
         
         
@@ -271,6 +274,9 @@ public class PetInfoServiceImpl implements PetInfoService {
 
 		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
 	}
+	
+	
+	// =================================
 
 	@Override
 	public PetInfoResponse quitAdoptPet(String petId, int userId) {
@@ -305,12 +311,6 @@ public class PetInfoServiceImpl implements PetInfoService {
         // 3. 將array轉回string
         String newStr = String.join(",", list.toArray(new String[0]));
 
-        // 打印结果
-//        System.out.println("Original String: " + strAdopterIdList);
-//        System.out.println("Original Array: " + Arrays.toString(strArray));
-//        System.out.println("Value to Remove: " + strToRemove);
-//        System.out.println("New Array: " + Arrays.toString(list.toArray(new String[0])));
-//        System.out.println("New String: " + newStr);
         
         pet.setAdopterIdList(newStr);
         

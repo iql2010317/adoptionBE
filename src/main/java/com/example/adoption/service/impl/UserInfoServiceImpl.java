@@ -4,6 +4,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -516,6 +519,22 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		UserInfo saveduserInfo = userInfoDao.save(userInfo);
 		return new UserInfoResponse(saveduserInfo);
+	}
+
+	@Override
+	public UserInfoResponse getAdoptersInfo(String idList) {
+		
+		String strAdopterIdList = idList;
+        String[] strArray = strAdopterIdList.split(",");
+
+        List<Integer> integerList = new ArrayList<>();
+        for (String str : strArray) {
+            int intValue = Integer.parseInt(str);
+            integerList.add(intValue);
+        }
+		        
+		List<UserInfo> userInfoList = userInfoDao.findAllByUserIdIn(integerList);
+		return new UserInfoResponse(userInfoList);
 	}
 
 }
