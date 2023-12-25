@@ -40,6 +40,15 @@ public class NotificationServiceTest {
 
 		service.setNotiRead(54);
 	}
+
+	
+	@Test
+	public void Test() {
+		
+		service.getNoti(4);
+	}
+
+
 	
 
 }

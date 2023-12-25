@@ -142,16 +142,21 @@ public class NotificationServiceImpl implements NotificationService {
 		// req = userid收信人 sendid寄信人 petid notifiType通知類型
 		
 		
-			
-		
 		// 請求進來的ID找其他資料
 		int userId = req.getNotification().getUserId();
 		int sendId = req.getNotification().getSendId();
 		String petId = req.getNotification().getPetId();
+		if(petId.isEmpty()) {
+			return new NotificationRes(null,RtnCode.PARAM_ERROR);
+		}
 		Optional<UserInfo> userData = userDao.findById(userId);
 		Optional<UserInfo> sendData = userDao.findById(sendId);
 		Optional<PetInfo> petData = petDao.findById(petId);
 
+		if(userData == null || sendData == null || petData == null) {
+			return new NotificationRes(null,RtnCode.ID_NOT_FOUND);
+		}
+		
 		String userName = userData.get().getUserName();
 		String sendName = sendData.get().getUserName();
 		String petName = petData.get().getPetName();
@@ -211,6 +216,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public NotificationRes getNoti(int userId) {
+		if(!notiDao.existsByUserId(userId)) {
+			return new NotificationRes(null,RtnCode.ID_NOT_FOUND);
+		}
 		List<Notification> notifiList = notiDao.selectNotificationByUserId(userId);
 		return new NotificationRes(notifiList, RtnCode.SUCCESSFUL);
 	}
@@ -218,6 +226,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public NotificationRes setNotiRead(int userId) {
+		if(!notiDao.existsByUserId(userId)) {
+			return new NotificationRes(null,RtnCode.ID_NOT_FOUND);
+		}
 		List<Notification> notifiList = notiDao.selectNotificationByUserId(userId);
 		for(Notification noti:notifiList) {
 			noti.setRead(true);
