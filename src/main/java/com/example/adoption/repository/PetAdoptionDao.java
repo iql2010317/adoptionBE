@@ -27,4 +27,7 @@ public interface PetAdoptionDao extends JpaRepository<PetAdoption, Integer>{
 	
 	
 	public PetAdoption findByPetIdAndOwnerIdAndAdopterId(String petId, int ownerId, int adopterId);
+	
+	
+	public PetAdoption findByPetIdAndAdopterId(String petId, int adopterId);
 }

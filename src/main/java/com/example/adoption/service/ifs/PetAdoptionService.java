@@ -13,5 +13,10 @@ public interface PetAdoptionService {
 	
 	// adopter confirm the apply of adoption
 	public PetAdoptionResponse adopterConfirm(String petId, int ownerId, int adopterId, int adopterRes);
+	
+	
+	// ================================
+	
+	
 
 }

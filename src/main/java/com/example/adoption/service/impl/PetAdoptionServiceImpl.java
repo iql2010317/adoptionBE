@@ -62,6 +62,7 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		// save to DB
 		// use try/catch
 		try {
+			petInfoDao.updateFinalAdopterId(adopterId);
 			petAdoptionDao.save(adoption);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -102,6 +103,11 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 			return new PetAdoptionResponse(null, RtnCode.SAVE_DB_ERROR);
 		}
 		
+		// if the adopter reject the adoption, let the final_adopter_id to 0
+		if(adopterRes == 2) {
+			pet.setFinalAdopterId(0);
+		}
+		
 		// check if the two users all confirm to adopt
 		PetAdoption adoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterId(petId, ownerId, adopterId);
 		if(adoption.getOwnerConfirm() == 1 && adoption.getAdopterConfirm() == 1) {
@@ -116,5 +122,7 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		
 		return new PetAdoptionResponse(adoption, RtnCode.SUCCESSFUL);
 	}
+
+	
 
 }

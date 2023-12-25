@@ -70,6 +70,7 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	@Query(value = "SELECT COUNT(*) FROM pet_info p WHERE FIND_IN_SET(:userId, p.adopter_id_list) > 0 AND p.pet_id = :petId", nativeQuery = true)
 	public int findByPetIdAndAdopterIdListContaining(@Param("petId") String petId, @Param("userId") String userId);
 	
+	
 	@Modifying(clearAutomatically = true)
 	@Transactional
 	@Query(value = "UPDATE PetInfo AS pet SET"
@@ -80,12 +81,14 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 			@Param("petId")String petId,
 			@Param("finalAdopterId")int finalAdopterId, 
 			@Param("adoptionStatus")String adoptionStatus);
-
-
 	
 	
 	@Query(value = "SELECT * FROM pet_info p WHERE p.pet_id = :petId", nativeQuery = true)
 	public PetInfo selectByPetId(@Param("petId")String petId);
+	
+	
+	@Query(value = "SELECT * FROM pet_info p WHERE p.final_adopter_id = :adopterId", nativeQuery = true)
+	public PetInfo updateFinalAdopterId(@Param("adopterId")int adopterId);
 
 	
 }

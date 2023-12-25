@@ -3,11 +3,12 @@ package com.example.adoption;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.adoption.entity.NewInfo;
 import com.example.adoption.repository.NewInfoDao;
 
-@SpringBootApplication
+@SpringBootTest
 public class NewInfoTest {
 
 	@Autowired
