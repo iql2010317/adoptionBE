@@ -69,7 +69,7 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		// save to DB
 		// use try/catch
 		try {
-			petInfoDao.updateFinalAdopterId(adopterId);
+			petInfoDao.updateFinalAdopterId(petId, adopterId);
 			petAdoptionDao.save(adoption);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -103,13 +103,19 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		}
 		PetInfo pet = findPet.get();
 		
-		PetAdoption findAdoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterId(petId, ownerId, adopterId);
+		
+		// check if there's data in DB
+		PetAdoption adoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterIdAndAdopterConfirm(petId, ownerId, adopterId, 0);
+		
+		if(adoption == null) {
+			return new PetAdoptionResponse(null, RtnCode.NOT_FOUND);
+		}
 		
 		
 		// save to DB
 		// use try/catch
 		try {
-			petAdoptionDao.updateAdoptionConfirm(findAdoption.getSerialNo(), 1, adopterRes);
+			petAdoptionDao.updateAdoptionConfirm(adoption.getSerialNo(), 1, adopterRes);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new PetAdoptionResponse(null, RtnCode.SAVE_DB_ERROR);
@@ -117,19 +123,30 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		
 		// if the adopter reject the adoption, let the final_adopter_id to 0
 		if(adopterRes == 2) {
-			pet.setFinalAdopterId(0);
+			try {
+				petInfoService.quitAdoptPet(petId, adopterId);
+				petInfoDao.updateFinalAdopterId(petId, 0);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return new PetAdoptionResponse(null, RtnCode.SAVE_DB_ERROR);
+			}
+			return new PetAdoptionResponse(adoption, RtnCode.SUCCESSFUL);
 		}
-		
+
 		// check if the two users all confirm to adopt
-		PetAdoption adoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterId(petId, ownerId, adopterId);
-		if(adoption.getOwnerConfirm() == 1 && adoption.getAdopterConfirm() == 1) {
-			petInfoDao.updateFinalAdopterIdAndAdoptionStatus(petId, adopterId, "已送養");
-			// save the new pet info to the adopter's pet list
-			PetInfo newPet = new PetInfo(adopterId, pet.getPetName(), pet.getPetBreed(), 
-					pet.getAdoptionStatus(), "正常", pet.getVaccine(),
-					pet.isLigation(), pet.getType());
-			PetInfoRequest req = new PetInfoRequest(newPet);
-			PetInfoResponse res = petInfoService.createPet(req);
+		if(adoption.getOwnerConfirm() == 1 && adopterRes == 1) {
+			System.out.println("entered");
+			try {
+				petInfoDao.updateFinalAdopterIdAndAdoptionStatus(petId, adopterId, "已送養");
+				// save the new pet info to the adopter's pet list
+				PetInfo newPet = new PetInfo(adopterId, pet.getPetName(), pet.getPetBreed(), "正常", 
+						pet.getAge(), pet.getVaccine(), pet.isLigation(), pet.getType(), pet.getPetPhoto());
+				PetInfoRequest req = new PetInfoRequest(newPet);
+				PetInfoResponse res = petInfoService.createPet(req);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return new PetAdoptionResponse(null, RtnCode.SAVE_DB_ERROR);
+			}
 		}
 		
 		return new PetAdoptionResponse(adoption, RtnCode.SUCCESSFUL);

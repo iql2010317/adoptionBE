@@ -26,6 +26,9 @@ public interface PetAdoptionDao extends JpaRepository<PetAdoption, Integer>{
 			@Param("adopterConfirm")int adopterConfirm);
 	
 	
+	public PetAdoption findByPetIdAndOwnerIdAndAdopterIdAndAdopterConfirm(String petId, int ownerId, int adopterId, int adopterConfirm);
+	
+	
 	public PetAdoption findByPetIdAndOwnerIdAndAdopterId(String petId, int ownerId, int adopterId);
 	
 	

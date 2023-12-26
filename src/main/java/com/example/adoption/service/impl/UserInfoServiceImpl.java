@@ -22,9 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.adoption.constants.RtnCode;
+import com.example.adoption.entity.PetInfo;
 import com.example.adoption.entity.UserInfo;
+import com.example.adoption.repository.PetInfoDao;
 import com.example.adoption.repository.UserInfoDao;
 import com.example.adoption.service.ifs.UserInfoService;
+import com.example.adoption.vo.PetInfoAndUserInfoResponse;
+import com.example.adoption.vo.PetInfoAndUserInfoVo;
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -501,8 +506,17 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return new UserInfoResponse(saveduserInfo);
 	}
 
+	
+	
+	
+	@Autowired
+	private PetInfoDao petInfoDao;
+	
+	
+	
+	// for adopters card in pet details
 	@Override
-	public UserInfoResponse getAdoptersInfo(String idList) {
+	public PetInfoAndUserInfoResponse getAdoptersInfo(String idList) {
 		
 		String strAdopterIdList = idList;
         String[] strArray = strAdopterIdList.split(",");
@@ -514,7 +528,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
 		        
 		List<UserInfo> userInfoList = userInfoDao.findAllByUserIdIn(integerList);
-		return new UserInfoResponse(userInfoList);
+		
+		// save to vo
+		List<PetInfoAndUserInfoVo> voList = new ArrayList<>();
+		for(UserInfo user: userInfoList) {
+			List<PetInfo> pets = petInfoDao.findAllByUserId(user.getUserId());
+			PetInfoAndUserInfoVo vo = new PetInfoAndUserInfoVo(user, pets);
+			voList.add(vo);
+		}
+		
+		return new PetInfoAndUserInfoResponse(voList);
 	}
 
 }

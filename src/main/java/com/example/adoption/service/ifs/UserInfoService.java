@@ -2,6 +2,7 @@ package com.example.adoption.service.ifs;
 
 import java.util.List;
 
+import com.example.adoption.vo.PetInfoAndUserInfoResponse;
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -20,7 +21,7 @@ public interface UserInfoService {
 	public UserInfoResponse searchById(int userId);
 	
 	// for pet info check the adopters
-	public UserInfoResponse getAdoptersInfo(String idList);
+	public PetInfoAndUserInfoResponse getAdoptersInfo(String idList);
 
 	// 用戶註冊
 	public String userLogin(String email, String password);

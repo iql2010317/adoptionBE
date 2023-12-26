@@ -233,6 +233,9 @@ public class PetInfoServiceImpl implements PetInfoService {
 		
 		return new PetInfoResponse(pet, RtnCode.SUCCESSFUL);
 	}
+	
+	
+	
 
 	@Override
 	public PetInfoListResponse getAdoptPetList(int userId) {
@@ -248,6 +251,9 @@ public class PetInfoServiceImpl implements PetInfoService {
 
 		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
 	}
+	
+	
+	
 
 	@Override
 	public PetInfoListResponse getAdoptablePetList(String type, String location) {

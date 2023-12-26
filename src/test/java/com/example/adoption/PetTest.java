@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.adoption.entity.PetAdoption;
 import com.example.adoption.entity.PetInfo;
+import com.example.adoption.repository.PetAdoptionDao;
 import com.example.adoption.service.ifs.PetAdoptionService;
 import com.example.adoption.service.ifs.PetInfoService;
 import com.example.adoption.vo.PetAdoptionResponse;
@@ -130,6 +132,15 @@ public class PetTest {
 		System.out.println(res.getRtnCode().getMessage());
 	}
 	
+	
+	@Autowired
+	private PetAdoptionDao petAdoptionDao;
+	
+	@Test
+	public void checkDao() {
+		PetAdoption findAdoption = petAdoptionDao.findByPetIdAndOwnerIdAndAdopterId("P6801", 68, 66);
+		System.out.println(findAdoption.getPetId());
+	}
 
 	
 }

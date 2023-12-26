@@ -119,7 +119,7 @@ public class PetInfoController {
 	}
 	
 	
-	// adopter confirm the apply of adoption
+	// adopter confirm or reject the apply of adoption
 	@PostMapping(value = "api/adoption/petInfo/adopterConfirm")
 	public PetAdoptionResponse adopterConfirm(@RequestBody PetAdoptionRequest req) {
 		return petAdoptionService.adopterConfirm(req.getPetId(), req.getOwnerId(), req.getAdopterId(), req.getAdopterRes());

@@ -87,8 +87,14 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	public PetInfo selectByPetId(@Param("petId")String petId);
 	
 	
-	@Query(value = "SELECT * FROM pet_info p WHERE p.final_adopter_id = :adopterId", nativeQuery = true)
-	public PetInfo updateFinalAdopterId(@Param("adopterId")int adopterId);
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(value = "UPDATE PetInfo AS pet SET"
+			+ " finalAdopterId = CASE WHEN :adopterId is null THEN pet.finalAdopterId ELSE :adopterId END"
+			+ " WHERE pet.petId = :petId")
+	public int updateFinalAdopterId(
+			@Param("petId")String petId, 
+			@Param("adopterId")int adopterId);
 
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.adoption.service.ifs.UserInfoService;
+import com.example.adoption.vo.PetInfoAndUserInfoResponse;
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -75,7 +76,7 @@ public class UserInfoController {
 	
 	// for My_Adopt detail
 	@GetMapping(value = "api/adoption/userInfo/findAdopters")
-	public UserInfoResponse getAdoptersInfo(@RequestParam(value="idList") String idList) {
+	public PetInfoAndUserInfoResponse getAdoptersInfo(@RequestParam(value="idList") String idList) {
 		return userInfoService.getAdoptersInfo(idList);
 	}
 
