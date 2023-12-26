@@ -26,7 +26,8 @@ public enum RtnCode {
 	THE_ADOPTER_IS_NOT_IN_THE_LIST(400, "The adopter is not in the list!!"), //
 	THE_USER_HAS_ALREADY_ADOPTED_THE_PET(400, "The user has already adopted the pet!!"), //
 	REJECT_ERROR(400, "Reject error!!"),//
-	DATA_NOT_FOUNT(404,"data not fount!!");
+	DATA_NOT_FOUNT(404,"Data not fount!!"), //
+	CAN_ONLY_CHOOSE_ONE_ADOPTER(400, "Can only choose one adopter!!");
 
 	
 

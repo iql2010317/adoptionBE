@@ -47,6 +47,13 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		if (findPet.isEmpty()) {
 			return new PetAdoptionResponse(null, RtnCode.ID_NOT_FOUND);
 		}
+		
+		// check if there's final adopter id
+		PetInfo pet = findPet.get();
+		if(pet.getFinalAdopterId() > 0) {
+			return new PetAdoptionResponse(null, RtnCode.CAN_ONLY_CHOOSE_ONE_ADOPTER);
+		}
+		
 
 		// check if the adopter is in the adopter list
 		String strUserId = Integer.toString(adopterId);
@@ -72,6 +79,11 @@ public class PetAdoptionServiceImpl implements PetAdoptionService {
 		return new PetAdoptionResponse(adoption, RtnCode.SUCCESSFUL);
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public PetAdoptionResponse adopterConfirm(String petId, int ownerId, int adopterId, int adopterRes) {
 		
