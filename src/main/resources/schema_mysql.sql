@@ -80,3 +80,17 @@ CREATE TABLE IF NOT EXISTS `map_search` (
   `img` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`serial_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `forum_entrance` (
+  `serial_no` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `post_content` varchar(500) DEFAULT NULL,
+  `post_photo` mediumblob,
+  `user_Id` int DEFAULT NULL,
+  `post_time` datetime DEFAULT NULL,
+  `post_modify_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`serial_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+

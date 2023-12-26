@@ -10,11 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.adoption.entity.ForumEntrance;
 import com.example.adoption.entity.NewInfo;
 import com.example.adoption.entity.UserInfo;
 import com.example.adoption.repository.UserInfoDao;
+import com.example.adoption.service.ifs.ForumEntranceService;
 import com.example.adoption.service.ifs.NewInfoService;
 import com.example.adoption.service.ifs.UserInfoService;
+import com.example.adoption.vo.ForumEntranceReq;
+import com.example.adoption.vo.ForumEntranceRes;
 import com.example.adoption.vo.NewInfoRequest;
 import com.example.adoption.vo.NewInfoResponse;
 import com.example.adoption.vo.UserInfoRequest;
@@ -32,7 +36,30 @@ class AdoptionApplicationTests {
 	@Autowired
 	private NewInfoService newInfoService;
 
-	// 嚙編嚙磕嚙瘡嚙踝蕭嚙踝蕭嚙�
+	@Autowired
+	private ForumEntranceService forumEntranceService;
+
+	@Test
+	void ForumEntranceSearchTest() {
+		ForumEntranceRes res = forumEntranceService.search();
+		List<ForumEntrance> forumEntranceList = res.getForumEntranceList();
+		for (ForumEntrance forumEntrance : forumEntranceList) {
+			System.out.println(forumEntrance.getUserId());
+			System.out.println(forumEntrance.getTitle());
+			System.out.println(forumEntrance.getPostTime());
+		}
+	}
+
+	@Test
+	void ForumEntranceCreateTest() {
+		ForumEntrance forumEntrance = new ForumEntrance();
+		forumEntrance.setUserId(66);
+		forumEntrance.setTitle("求助，我家的貓咪突然吃不下飯，線上等，急!!");
+		forumEntrance.setPostContent("貓咪從昨天突然就沒有睡覺，然後也吃不太下，我應該帶去看醫生嗎?");
+		ForumEntranceReq req = new ForumEntranceReq(forumEntrance);
+		forumEntranceService.create(req);
+	}
+
 	@Test
 	void userInfoCreateTest() {
 		UserInfo userInfo = new UserInfo();
