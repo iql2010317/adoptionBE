@@ -256,23 +256,44 @@ public class PetInfoServiceImpl implements PetInfoService {
 	
 
 	@Override
-	public PetInfoListResponse getAdoptablePetList(String type, String location) {
-
+	public PetInfoListResponse getAdoptablePetList(String status, String type, String area, String location) {
+		
 		String searchType = type;
-		String searchLocation = location;
+		String searchArea = area;
+		List<String> searchLocation = new ArrayList<>();
 
 		// check if the parameter is null, set ""
 		if (type == null) {
 			searchType = "";
 		}
-		if (location == null) {
-			searchLocation = "";
+		if (area == null) {
+			searchArea = "";
+		}
+		if (location != null && location.trim() != "") {
+			searchLocation.add(location);
+		} else if (searchArea != null){
+			switch (searchArea) {
+		        case "北部":
+		        	searchLocation = Arrays.asList("台北市","新北市","基隆市","新竹市","桃園市","新竹縣","宜蘭縣");
+		        	break;
+		        case "中部":
+		        	searchLocation = Arrays.asList("台中市","苗栗縣","彰化縣","南投縣","雲林縣");
+		        	break;
+		        case "南部":
+		        	searchLocation = Arrays.asList("高雄市","台南市","嘉義市","嘉義縣","屏東縣","澎湖縣");
+		        	break;
+		        case "東部":
+		        	searchLocation = Arrays.asList("花蓮縣", "台東縣");
+		        	break;
+		        default:
+		        	searchLocation = Arrays.asList("台北市","新北市","基隆市","新竹市","桃園市","新竹縣","宜蘭縣",
+		        		"台中市","苗栗縣","彰化縣","南投縣","雲林縣",
+	                    "高雄市","台南市","嘉義市","嘉義縣","屏東縣","澎湖縣",
+	                    "花蓮縣","台東縣", "");
+		    }
 		}
 
-//		List<PetInfo> res = petDao.findAllByAdoptionStatus("送養中");
-//		List<PetInfo> res = petDao.findAllByAdoptionStatusAndTypeContaining("送養中", searchType);
-		List<PetInfo> res = petDao.findAllByAdoptionStatusAndTypeContainingAndLocationContaining("送養中", searchType,
-				searchLocation);
+		List<PetInfo> res = petDao.findAllByAdoptionStatusAndTypeContainingAndLocationIn(status, searchType, searchLocation);
 
 		if (res.isEmpty()) {
 			return new PetInfoListResponse(res, RtnCode.NOT_FOUND);
@@ -280,6 +301,8 @@ public class PetInfoServiceImpl implements PetInfoService {
 
 		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
 	}
+	
+	
 	
 	
 	// =================================
@@ -430,7 +453,28 @@ public class PetInfoServiceImpl implements PetInfoService {
 	}
 
 
+	
+	
+	
+	// =================================================
+	
 
+	
+	@Override
+	public PetInfoListResponse getAdoptedPetList() {
+		
+		List<PetInfo> res = new ArrayList<>();
+		
+		try {
+			res = petDao.findAllByAdoptionStatus("已送養");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+ 			return new PetInfoListResponse(null, RtnCode.SAVE_DB_ERROR);
+		}
+		
+		
+		return new PetInfoListResponse(res, RtnCode.SUCCESSFUL);
+	}
 	
 
 }

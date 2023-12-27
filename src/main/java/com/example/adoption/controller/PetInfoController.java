@@ -83,8 +83,8 @@ public class PetInfoController {
 	
 	// all adoptable pets
 	@GetMapping(value = "api/adoption/petInfo/getAdoptablePetList")
-	public PetInfoListResponse getAdoptablePetList(@RequestParam(value = "type") String type,@RequestParam(value = "location") String location) {
-		return petInfoService.getAdoptablePetList(type, location);
+	public PetInfoListResponse getAdoptablePetList(@RequestParam(value = "status") String status, @RequestParam(value = "type") String type, @RequestParam(value = "area") String area, @RequestParam(value = "location") String location) {
+		return petInfoService.getAdoptablePetList(status, type, area, location);
 	}
 	
 	
@@ -125,6 +125,18 @@ public class PetInfoController {
 		return petAdoptionService.adopterConfirm(req.getPetId(), req.getOwnerId(), req.getAdopterId(), req.getAdopterRes());
 	}
 
+	
+	
+	
+	// ===============================
+	
+	
+	
+	// get adopted list
+	@GetMapping(value = "api/adoption/petInfo/getAdoptedPetList")
+	public PetInfoListResponse getAdoptedPetList() {
+		return petInfoService.getAdoptedPetList();
+	}
 	
 	
 }
