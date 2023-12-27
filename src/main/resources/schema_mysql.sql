@@ -92,5 +92,16 @@ CREATE TABLE IF NOT EXISTS `forum_entrance` (
   PRIMARY KEY (`serial_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE IF NOT EXISTS `post_comment` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
+  `post_serial_no` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  `comment_content` varchar(500) DEFAULT NULL,
+  `comment_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
