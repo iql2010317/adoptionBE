@@ -12,15 +12,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.adoption.entity.ForumEntrance;
 import com.example.adoption.entity.NewInfo;
+import com.example.adoption.entity.PostComment;
 import com.example.adoption.entity.UserInfo;
 import com.example.adoption.repository.UserInfoDao;
 import com.example.adoption.service.ifs.ForumEntranceService;
 import com.example.adoption.service.ifs.NewInfoService;
+import com.example.adoption.service.ifs.PostCommentService;
 import com.example.adoption.service.ifs.UserInfoService;
 import com.example.adoption.vo.ForumEntranceReq;
 import com.example.adoption.vo.ForumEntranceRes;
 import com.example.adoption.vo.NewInfoRequest;
 import com.example.adoption.vo.NewInfoResponse;
+import com.example.adoption.vo.PostCommentReq;
+import com.example.adoption.vo.PostCommentRes;
 import com.example.adoption.vo.UserInfoRequest;
 import com.example.adoption.vo.UserInfoResponse;
 
@@ -38,6 +42,45 @@ class AdoptionApplicationTests {
 
 	@Autowired
 	private ForumEntranceService forumEntranceService;
+
+	@Autowired
+	private PostCommentService postCommentService;
+
+	@Test
+	void PostCommentDeleteTest() {
+		postCommentService.delete(3);
+	}
+
+	@Test
+	void PostCommentUpdateTest() {
+		PostComment postComment = new PostComment();
+		postComment.setCommentId(3);
+		postComment.setCommentContent("對阿對阿對阿~");
+		PostCommentReq req = new PostCommentReq(postComment);
+		postCommentService.update(req);
+	}
+
+	@Test
+	void PostCommentSearchBySerialNoTest() {
+		PostCommentRes res = postCommentService.searchByPostSerialNo(7);
+		List<PostComment> postCommentList = res.getPostCommentList();
+		for (PostComment postComment : postCommentList) {
+			System.out.println(postComment.getUserName());
+			System.out.println(postComment.getCommentContent());
+		}
+	}
+
+	@Test
+	void PostCommentCreateTest() {
+		PostComment postComment = new PostComment();
+		postComment.setPostSerialNo(7);
+		postComment.setUserId(68);
+		postComment.setUserName("怡君");
+		postComment.setCommentContent("兔兔好可愛!!!");
+		PostCommentReq req = new PostCommentReq(postComment);
+		postCommentService.create(req);
+
+	}
 
 	@Test
 	void ForumEntranceDeleteTest() {
