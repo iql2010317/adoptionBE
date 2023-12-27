@@ -40,6 +40,21 @@ class AdoptionApplicationTests {
 	private ForumEntranceService forumEntranceService;
 
 	@Test
+	void ForumEntranceDeleteTest() {
+		forumEntranceService.delete(5);
+	}
+
+	@Test
+	void ForumEntranceUpdateTest() {
+		ForumEntrance forumEntrance = new ForumEntrance();
+		forumEntrance.setSerialNo(3);
+		forumEntrance.setTitle("請問，我第一次養吉娃娃，我該注意什麼?(謝謝大家)");
+		forumEntrance.setPostContent("謝謝大家，已經處理好了");
+		ForumEntranceReq req = new ForumEntranceReq(forumEntrance);
+		forumEntranceService.update(req);
+	}
+
+	@Test
 	void ForumEntranceSearchTest() {
 		ForumEntranceRes res = forumEntranceService.search();
 		List<ForumEntrance> forumEntranceList = res.getForumEntranceList();
