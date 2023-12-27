@@ -90,7 +90,7 @@ public class PetTest {
 	
 	@Test
 	public void getAdoptablePetListTest() {
-		PetInfoListResponse res = petService.getAdoptablePetList(null, null);
+		PetInfoListResponse res = petService.getAdoptablePetList("送養中", null, null, null);
 		System.out.println(res.getRtnCode().getMessage());
 		System.out.println(res.getPetInfoList().size());
 	}

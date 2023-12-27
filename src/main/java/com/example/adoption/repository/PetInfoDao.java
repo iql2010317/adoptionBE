@@ -1,5 +1,6 @@
 package com.example.adoption.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -60,7 +61,7 @@ public interface PetInfoDao extends JpaRepository<PetInfo, String>{
 	
 	public List<PetInfo> findAllByAdoptionStatusAndTypeContaining(String adoption, String type);
 	
-	public List<PetInfo> findAllByAdoptionStatusAndTypeContainingAndLocationContaining(String adoption, String type, String location);
+	public List<PetInfo> findAllByAdoptionStatusAndTypeContainingAndLocationIn(String adoption, String type, List<String> location);
 	
 	
 	// ==============================================

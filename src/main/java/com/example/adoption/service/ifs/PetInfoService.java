@@ -32,10 +32,10 @@ public interface PetInfoService {
 	public PetInfoListResponse getAdoptPetList(int userId);
 	
 	// all adoptable pets
-	public PetInfoListResponse getAdoptablePetList(String type, String location);
+	public PetInfoListResponse getAdoptablePetList(String status, String type, String area, String location);
 	
 	
-	//==========================
+	// ==========================
 	// impl line 279
 	
 	
@@ -49,5 +49,12 @@ public interface PetInfoService {
 	public PetInfoAndUserInfoResponse getAdoptPetInfoAndUserInfo(String petId);
 	
 	
+	
+	// ===========================
+	// impl line 436
+	
+	
+	// adopted list
+	public PetInfoListResponse getAdoptedPetList();
 	
 }
