@@ -56,15 +56,6 @@ CREATE TABLE IF NOT EXISTS `pet_info` (
   PRIMARY KEY (`pet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `new_info` (
-  `serial_no` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
-  `content` varchar(500) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `category` varchar(45) DEFAULT NULL,
-  `image` mediumblob,
-  PRIMARY KEY (`serial_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `map_search` (
   `serial_no` int NOT NULL AUTO_INCREMENT,
@@ -101,6 +92,17 @@ CREATE TABLE IF NOT EXISTS `post_comment` (
   `comment_time` datetime DEFAULT NULL,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS `new_info` (
+  `serial_no` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
+  `image` mediumblob,
+  `type` varchar(45) DEFAULT NULL COMMENT '12.27新增分類：新聞、科普',
+  PRIMARY KEY (`serial_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 

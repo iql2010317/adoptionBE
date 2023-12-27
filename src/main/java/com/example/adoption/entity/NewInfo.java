@@ -33,6 +33,26 @@ public class NewInfo {
 	@Column(name = "image", columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
 
+	@Column(name = "type")
+	private String type;
+
+	public NewInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public NewInfo(int serialNo, String title, String content, LocalDate date, String category, byte[] image,
+			String type) {
+		super();
+		this.serialNo = serialNo;
+		this.title = title;
+		this.content = content;
+		this.date = date;
+		this.category = category;
+		this.image = image;
+		this.type = type;
+	}
+
 	public int getSerialNo() {
 		return serialNo;
 	}
@@ -81,30 +101,12 @@ public class NewInfo {
 		this.image = image;
 	}
 
-	public NewInfo(int serialNo, String title, String content, LocalDate date, String category, byte[] image) {
-		super();
-		this.serialNo = serialNo;
-		this.title = title;
-		this.content = content;
-		this.date = date;
-		this.category = category;
-		this.image = image;
+	public String getType() {
+		return type;
 	}
 
-	public NewInfo() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setType(String type) {
+		this.type = type;
 	}
-
-	public NewInfo(String title, String content, LocalDate date, String category, byte[] image) {
-		super();
-		this.title = title;
-		this.content = content;
-		this.date = date;
-		this.category = category;
-		this.image = image;
-	}
-
-
 
 }
