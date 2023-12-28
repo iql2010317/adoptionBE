@@ -36,13 +36,16 @@ public class ForumEntrance {
 	@Column(name = "post_modify_time")
 	private LocalDateTime postModifyTime;
 
+	@Column(name = "likes_count")
+	private int likesCount;
+
 	public ForumEntrance() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public ForumEntrance(int serialNo, String title, String postContent, byte[] postPhoto, int userId,
-			LocalDateTime postTime, LocalDateTime postModifyTime) {
+			LocalDateTime postTime, LocalDateTime postModifyTime, int likesCount) {
 		super();
 		this.serialNo = serialNo;
 		this.title = title;
@@ -51,6 +54,7 @@ public class ForumEntrance {
 		this.userId = userId;
 		this.postTime = postTime;
 		this.postModifyTime = postModifyTime;
+		this.likesCount = likesCount;
 	}
 
 	public int getSerialNo() {
@@ -107,6 +111,14 @@ public class ForumEntrance {
 
 	public void setPostModifyTime(LocalDateTime postModifyTime) {
 		this.postModifyTime = postModifyTime;
+	}
+
+	public int getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
 	}
 
 }

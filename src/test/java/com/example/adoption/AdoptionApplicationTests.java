@@ -11,16 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.adoption.entity.ForumEntrance;
+import com.example.adoption.entity.LikesRecord;
 import com.example.adoption.entity.NewInfo;
 import com.example.adoption.entity.PostComment;
 import com.example.adoption.entity.UserInfo;
 import com.example.adoption.repository.UserInfoDao;
 import com.example.adoption.service.ifs.ForumEntranceService;
+import com.example.adoption.service.ifs.LikesRecordService;
 import com.example.adoption.service.ifs.NewInfoService;
 import com.example.adoption.service.ifs.PostCommentService;
 import com.example.adoption.service.ifs.UserInfoService;
 import com.example.adoption.vo.ForumEntranceReq;
 import com.example.adoption.vo.ForumEntranceRes;
+import com.example.adoption.vo.LikesRecordReq;
 import com.example.adoption.vo.NewInfoRequest;
 import com.example.adoption.vo.NewInfoResponse;
 import com.example.adoption.vo.PostCommentReq;
@@ -45,6 +48,18 @@ class AdoptionApplicationTests {
 
 	@Autowired
 	private PostCommentService postCommentService;
+
+	@Autowired
+	private LikesRecordService likesRecordService;
+
+	@Test
+	void CreateLikeForPostTest() {
+		LikesRecord likesRecord = new LikesRecord();
+		likesRecord.setPost_id(7);
+		likesRecord.setUser_id(66);
+		LikesRecordReq req = new LikesRecordReq(likesRecord);
+		likesRecordService.createLike(req);
+	}
 
 	@Test
 	void PostCommentDeleteTest() {
