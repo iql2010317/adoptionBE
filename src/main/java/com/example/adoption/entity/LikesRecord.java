@@ -17,21 +17,21 @@ public class LikesRecord {
 	private int serial_no;
 
 	@Column(name = "post_id")
-	private int post_id;
+	private int postId;
 
 	@Column(name = "user_id")
-	private int user_id;
+	private int userId;
 
 	public LikesRecord() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public LikesRecord(int serial_no, int post_id, int user_id) {
+	public LikesRecord(int serial_no, int postId, int userId) {
 		super();
 		this.serial_no = serial_no;
-		this.post_id = post_id;
-		this.user_id = user_id;
+		this.postId = postId;
+		this.userId = userId;
 	}
 
 	public int getSerial_no() {
@@ -42,20 +42,20 @@ public class LikesRecord {
 		this.serial_no = serial_no;
 	}
 
-	public int getPost_id() {
-		return post_id;
+	public int getPostId() {
+		return postId;
 	}
 
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

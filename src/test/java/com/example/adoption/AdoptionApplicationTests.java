@@ -24,6 +24,7 @@ import com.example.adoption.service.ifs.UserInfoService;
 import com.example.adoption.vo.ForumEntranceReq;
 import com.example.adoption.vo.ForumEntranceRes;
 import com.example.adoption.vo.LikesRecordReq;
+import com.example.adoption.vo.LikesRecordRes;
 import com.example.adoption.vo.NewInfoRequest;
 import com.example.adoption.vo.NewInfoResponse;
 import com.example.adoption.vo.PostCommentReq;
@@ -53,10 +54,28 @@ class AdoptionApplicationTests {
 	private LikesRecordService likesRecordService;
 
 	@Test
+	void SearchLikeForPostTest2() {
+		LikesRecordRes res = likesRecordService.searchLikeByUserId(76);
+		List<LikesRecord> likesRecordList = res.getLikesRecordList();
+		for (LikesRecord likesRecord : likesRecordList) {
+			System.out.println(likesRecord.getPostId());
+		}
+	}
+
+	@Test
+	void SearchLikeForPostTest() {
+		LikesRecordRes res = likesRecordService.searchLikeByPostId(17);
+		List<LikesRecord> likesRecordList = res.getLikesRecordList();
+		for (LikesRecord likesRecord : likesRecordList) {
+			System.out.println(likesRecord.getUserId());
+		}
+	}
+
+	@Test
 	void CreateLikeForPostTest() {
 		LikesRecord likesRecord = new LikesRecord();
-		likesRecord.setPost_id(7);
-		likesRecord.setUser_id(66);
+		likesRecord.setPostId(17);
+		likesRecord.setUserId(69);
 		LikesRecordReq req = new LikesRecordReq(likesRecord);
 		likesRecordService.createLike(req);
 	}
