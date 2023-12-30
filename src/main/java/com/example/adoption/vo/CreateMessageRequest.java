@@ -1,5 +1,7 @@
 package com.example.adoption.vo;
 
+import java.time.LocalDateTime;
+
 public class CreateMessageRequest {
 
 	
@@ -9,6 +11,8 @@ public class CreateMessageRequest {
 	private String text;
 	
 	private String chatRoomId;
+	
+	private LocalDateTime timeStamp;
 
 	
 	
@@ -19,11 +23,12 @@ public class CreateMessageRequest {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CreateMessageRequest(int sender, String text, String charRoomId) {
+	public CreateMessageRequest(int sender, String text, String charRoomId, LocalDateTime timeStamp) {
 		super();
 		this.sender = sender;
 		this.text = text;
 		this.chatRoomId = charRoomId;
+		this.timeStamp = timeStamp;
 	}
 
 	
@@ -52,6 +57,14 @@ public class CreateMessageRequest {
 
 	public void setChatRoomId(String chatRoomId) {
 		this.chatRoomId = chatRoomId;
+	}
+
+	public LocalDateTime getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(LocalDateTime timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	

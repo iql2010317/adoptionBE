@@ -32,6 +32,9 @@ public class ChatRoom {
 	@Column(name = "last_message")
 	private String lastMsg;
 	
+	@Column(name = "last_sender")
+	private int lastSender;
+	
 	@Column(name = "name")
 	private String name;
 	
@@ -142,6 +145,14 @@ public class ChatRoom {
 
 	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
+	}
+
+	public int getLastSender() {
+		return lastSender;
+	}
+
+	public void setLastSender(int lastSender) {
+		this.lastSender = lastSender;
 	}
 	
 	
