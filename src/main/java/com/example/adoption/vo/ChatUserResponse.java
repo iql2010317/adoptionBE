@@ -7,6 +7,7 @@ import com.example.adoption.entity.ChatUser;
 
 public class ChatUserResponse {
 
+	private ChatUser chatUser;
 	
 	private List<ChatUser> chatUserList;
 	
@@ -20,6 +21,12 @@ public class ChatUserResponse {
 	public ChatUserResponse(List<ChatUser> chatUserList, RtnCode rtnCode) {
 		super();
 		this.chatUserList = chatUserList;
+		this.rtnCode = rtnCode;
+	}
+
+	public ChatUserResponse(ChatUser chatUser, RtnCode rtnCode) {
+		super();
+		this.chatUser = chatUser;
 		this.rtnCode = rtnCode;
 	}
 
@@ -43,7 +50,14 @@ public class ChatUserResponse {
 	public void setRtnCode(RtnCode rtnCode) {
 		this.rtnCode = rtnCode;
 	}
-	
+
+	public ChatUser getChatUser() {
+		return chatUser;
+	}
+
+	public void setChatUser(ChatUser chatUser) {
+		this.chatUser = chatUser;
+	}
 	
 	
 }

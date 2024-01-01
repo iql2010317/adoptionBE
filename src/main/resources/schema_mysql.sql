@@ -94,7 +94,6 @@ CREATE TABLE IF NOT EXISTS `new_info` (
   PRIMARY KEY (`serial_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
 CREATE TABLE IF NOT EXISTS `chat_message` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ent` int DEFAULT NULL,
@@ -103,8 +102,7 @@ CREATE TABLE IF NOT EXISTS `chat_message` (
   `sender` int NOT NULL,
   `text` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `chat_room` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -112,23 +110,24 @@ CREATE TABLE IF NOT EXISTS `chat_room` (
   `chat_room_id` varchar(45) NOT NULL,
   `last_time_stamp` datetime DEFAULT NULL,
   `last_message` varchar(200) DEFAULT NULL,
+  `last_sender` int DEFAULT '0',
   `name` varchar(45) DEFAULT NULL,
   `subscriber_list` varchar(100) DEFAULT NULL,
   `creator` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+  `create_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `subscriber_list_UNIQUE` (`subscriber_list`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `chat_user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sender` int NOT NULL,
-  `recirver` int NOT NULL,
+  `receiver` int NOT NULL,
   `chat_room_id` varchar(45) NOT NULL,
   `is_read` tinyint DEFAULT '0',
   `read_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `forum_entrance` (
   `serial_no` int NOT NULL AUTO_INCREMENT,
