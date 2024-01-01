@@ -44,6 +44,17 @@ public class ChatUser {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ChatUser(int id, int sender, int receiver, String chatRoomId, Boolean read, LocalDateTime readTime) {
+		super();
+		this.id = id;
+		this.sender = sender;
+		this.receiver = receiver;
+		this.chatRoomId = chatRoomId;
+		this.read = read;
+		this.readTime = readTime;
+	}
+
+
 	public ChatUser(int sender, int receiver, String chatRoomId, Boolean read) {
 		super();
 		this.sender = sender;
@@ -51,10 +62,15 @@ public class ChatUser {
 		this.chatRoomId = chatRoomId;
 		this.read = read;
 	}
+	
+	public ChatUser(int receiver, String chatRoomId, Boolean read, LocalDateTime readTime) {
+		super();
+		this.receiver = receiver;
+		this.chatRoomId = chatRoomId;
+		this.read = read;
+		this.readTime = readTime;
+	}
 
-	
-	
-	
 	/* getter&setter */
 	public int getSender() {
 		return sender;
@@ -90,6 +106,14 @@ public class ChatUser {
 
 	public int getId() {
 		return id;
+	}
+
+	public LocalDateTime getReadTime() {
+		return readTime;
+	}
+
+	public void setReadTime(LocalDateTime readTime) {
+		this.readTime = readTime;
 	}
 	
 	

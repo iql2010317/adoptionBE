@@ -31,6 +31,9 @@ dependencies {
 	/// 12.14 send email
 	implementation 'com.sun.mail:javax.mail:1.6.2'	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	//Hot Deployment
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 tasks.named('test') {

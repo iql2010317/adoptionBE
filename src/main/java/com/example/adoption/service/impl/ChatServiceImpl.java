@@ -190,7 +190,7 @@ public class ChatServiceImpl implements ChatService{
 		try {
 			chatMsgDao.save(msg);
 			chatRoomDao.updateLastTimeStampAndLastMessageAndLastSender(chatRoomId, timeStamp, text, sender);
-			if(foundChatUsers == null) {
+			if(foundChatUsers.isEmpty()) {
 				// add new unread ChatUser
 				chatUserDao.saveAll(newUserList);
 			}
@@ -223,7 +223,7 @@ public class ChatServiceImpl implements ChatService{
 	
 	
 	@Override
-	public ChatUserResponse getChatUsers(String chatRoomIds) {
+	public ChatUserResponse getChatUserList(String chatRoomIds) {
 		
 		// check parameters
 		if(!StringUtils.hasText(chatRoomIds)) {
@@ -278,13 +278,49 @@ public class ChatServiceImpl implements ChatService{
 			return new ChatUserResponse(RtnCode.NOT_FOUND);
 		}
 		
+		ChatUser newChatUser = new ChatUser(receiver, chatRoomId, true, LocalDateTime.now());
+		
 		try {
-			chatUserDao.updateRead(chatRoomId, receiver, true, LocalDateTime.now());
+			chatUserDao.updateRead(chatRoomId,receiver, true, LocalDateTime.now());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new ChatUserResponse(RtnCode.SAVE_DB_ERROR);
 		}
-		return new ChatUserResponse(RtnCode.SUCCESSFUL);
+		return new ChatUserResponse(newChatUser, RtnCode.SUCCESSFUL);
+	}
+
+
+
+
+	@Override
+	public ChatRoomResponse getNewChatMessage(String chatRoomId) {
+		
+		// check this parameters
+		if( !StringUtils.hasText(chatRoomId) ) {
+			return new ChatRoomResponse(RtnCode.PARAM_ERROR);
+		}
+		
+		ChatRoom foundChatRoom = chatRoomDao.findByChatRoomId(chatRoomId);
+		
+		return new ChatRoomResponse(RtnCode.SUCCESSFUL, foundChatRoom);
+	}
+
+
+
+
+	@Override
+	public ChatUserResponse getChatUser(String chatRoomId, int receiver) {
+		
+		// check parameters
+		if(!StringUtils.hasText(chatRoomId) || receiver == 0 || receiver < 0) {
+			return new ChatUserResponse(RtnCode.PARAM_ERROR);
+		}
+		
+		
+		ChatUser foundChatUser = chatUserDao.findByChatRoomIdAndReceiver(chatRoomId, receiver);
+		
+		
+		return new ChatUserResponse(foundChatUser, RtnCode.SUCCESSFUL);
 	}
 
 

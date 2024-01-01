@@ -20,11 +20,14 @@ public interface ChatService {
 	
 	public ChatRoomResponse getChatRooms(int userId);
 	
-	public ChatUserResponse getChatUsers(String chatRoomIds);
+	public ChatUserResponse getChatUserList(String chatRoomIds);
 	
 	public ChatMsgResponse getMessages(int userId, String chatRoomId);
 	
 	public ChatUserResponse readMessages(int receiver, String chatRoomId);
 	
+	public ChatRoomResponse getNewChatMessage(String chatRoomId);
+	
+	public ChatUserResponse getChatUser(String chatRoomId, int receiver);
 	
 }

@@ -8,6 +8,7 @@ import com.example.adoption.entity.ChatUser;
 
 public class ChatRoomResponse {
 
+	private ChatRoom chatRoom;
 	
 	private List<ChatRoom> chatRoomList;
 	
@@ -29,7 +30,11 @@ public class ChatRoomResponse {
 		this.rtnCode = rtnCode;
 	}
 
-	
+	public ChatRoomResponse(RtnCode rtnCode, ChatRoom chatRoom) {
+		super();
+		this.chatRoom = chatRoom;
+		this.rtnCode = rtnCode;
+	}
 
 	public RtnCode getRtnCode() {
 		return rtnCode;
@@ -45,6 +50,14 @@ public class ChatRoomResponse {
 
 	public void setChatRoomList(List<ChatRoom> chatRoomList) {
 		this.chatRoomList = chatRoomList;
+	}
+
+	public ChatRoom getChatRoom() {
+		return chatRoom;
+	}
+
+	public void setChatRoom(ChatRoom chatRoom) {
+		this.chatRoom = chatRoom;
 	}
 	
 	
